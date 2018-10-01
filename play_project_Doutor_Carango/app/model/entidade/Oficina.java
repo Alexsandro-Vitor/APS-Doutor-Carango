@@ -3,10 +3,12 @@ package model.entidade;
 public class Oficina {
 	private String nome;
 	private String endereco;
+	private double rankingQualidade;
 
-	public Oficina(String nome, String endereco) {
+	public Oficina(String nome, String endereco, double qualidade) {
 		this.nome = nome;
 		this.endereco = endereco;
+		this.rankingQualidade = qualidade;
 	}
 
 	public String getNome() {
@@ -15,5 +17,9 @@ public class Oficina {
 
 	public String getEndereco() {
 		return this.endereco;
+	}
+
+	public double getRankingQualidade() {
+		return this.rankingQualidade;
 	}
 }
