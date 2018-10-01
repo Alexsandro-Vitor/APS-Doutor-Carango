@@ -5,7 +5,7 @@ public class Cliente {
 	private String login;
 	private String senha;
 
-	public Cliente(nome, login, senha) {
+	public Cliente(String nome, String login, String senha) {
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;

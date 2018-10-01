@@ -5,7 +5,7 @@ public class GerenteOficina {
 	private String login;
 	private String senha;
 
-	public GerenteOficina(nome, login, senha) {
+	public GerenteOficina(String nome, String login, String senha) {
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
