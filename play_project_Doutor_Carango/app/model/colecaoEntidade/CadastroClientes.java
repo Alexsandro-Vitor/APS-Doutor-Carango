@@ -1,6 +1,7 @@
 package model.colecaoEntidade;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ListIterator;
 
 import model.entidade.Cliente;
@@ -13,7 +14,7 @@ public class CadastroClientes {
 	}
 
 	/**
-	 * Cadastra um cliente novo
+	 * Cadastra um Cliente novo
 	 * @param cliente O novo Cliente
 	 */
 	public void cadastrar(Cliente cliente) {
@@ -22,8 +23,8 @@ public class CadastroClientes {
 
 	/**
 	 * Busca um Cliente
-	 * @param login O login do cliente buscado
-	 * @return O cliente com o login dado
+	 * @param login O login do Cliente buscado
+	 * @return O Cliente com o login dado
 	 */
 	public Cliente buscar(String login) {
 		ListIterator<Cliente> iterator = this.lista.listIterator();
@@ -32,5 +33,17 @@ public class CadastroClientes {
 				return iterator.next();
 		}
 		return null;
+	}
+
+	/**
+	 * Remove um Cliente
+	 * @param nome O login do Cliente buscado
+	 */
+	public void remover(String login) {
+		ListIterator<Cliente> iterator = this.lista.listIterator();
+		while (iterator.hasNext()) {
+			if (iterator.next().getLogin().equals(login))
+				iterator.remove();
+		}
 	}
 }
