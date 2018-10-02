@@ -1,3 +1,9 @@
+import model.entidade.Cliente;
+import model.negocio.ControladorClientes;
+
+import model.entidade.Oficina;
+import model.negocio.ControladorOficinas;
+
 public class Fachada {
 	private ControladorClientes clientes;
 	private ControladorOficinas oficinas;
@@ -20,14 +26,14 @@ public class Fachada {
 	}
 
 	public void cadastrarOficina(String nome, String endereco) {
-		this.clientes.cadastrar(new Oficina(nome, endereco, 0));
+		this.oficinas.cadastrar(new Oficina(nome, endereco, 0));
 	}
 
-	public Cliente buscarOficina(String nome) {
-		return this.clientes.buscar(nome);
+	public Oficina buscarOficina(String nome) {
+		return this.oficinas.buscar(nome);
 	}
 
 	public void removerOficina(String nome) {
-		this.clientes.remover(nome);
+		this.oficinas.remover(nome);
 	}
 }
