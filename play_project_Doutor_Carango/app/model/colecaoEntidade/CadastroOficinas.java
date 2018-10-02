@@ -30,8 +30,9 @@ public class CadastroOficinas {
 	public Oficina buscar(String nome) {
 		ListIterator<Oficina> iterator = this.lista.listIterator();
 		while (iterator.hasNext()) {
-			if (iterator.next().getNome().equals(nome))
-				return iterator.next();
+			Oficina temp = iterator.next();
+			if (temp.getNome().equals(nome))
+				return temp;
 		}
 		return null;
 	}
@@ -51,7 +52,7 @@ public class CadastroOficinas {
 	/**
 	 * Ordena as oficinas por qualidade
 	 * @return A lista de Oficinas ordenada por qualidade
-	 */
+	 
 	public ArrayList<Oficina> buscarOficinasOrdenadasQualidade() {
 		Collections.sort(this.lista, new Comparator<Oficina>() {
 			public int compare(Oficina a, Oficina b) {
@@ -61,5 +62,5 @@ public class CadastroOficinas {
 			}
 		});
 		return this.lista;
-	}
+	}*/
 }

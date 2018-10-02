@@ -29,8 +29,9 @@ public class CadastroClientes {
 	public Cliente buscar(String login) {
 		ListIterator<Cliente> iterator = this.lista.listIterator();
 		while (iterator.hasNext()) {
-			if (iterator.next().getLogin().equals(login))
-				return iterator.next();
+			Cliente temp = iterator.next();
+			if (temp.getLogin().equals(login))
+				return temp;
 		}
 		return null;
 	}

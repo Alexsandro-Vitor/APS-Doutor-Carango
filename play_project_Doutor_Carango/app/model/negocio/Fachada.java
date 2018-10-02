@@ -1,3 +1,5 @@
+package model.negocio;
+
 import model.entidade.Cliente;
 import model.negocio.ControladorClientes;
 
@@ -10,7 +12,12 @@ public class Fachada {
 
 	public Fachada() {
 		clientes = new ControladorClientes();
+		this.clientes.cadastrar(new Cliente("A", "aaa", "1234"));
+		this.clientes.cadastrar(new Cliente("B", "baa", "1234"));
+		this.clientes.cadastrar(new Cliente("C", "caa", "1234"));
 		oficinas = new ControladorOficinas();
+		this.oficinas.cadastrar(new Oficina("Optimus", "Cybertron", 0));
+		this.oficinas.cadastrar(new Oficina("Oficina", "Endereço", 0));
 	}
 
 	public void cadastrarCliente(String nome, String login, String senha) {

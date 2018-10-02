@@ -15,7 +15,8 @@ public class ControladorClientes {
 	}
 
 	public void cadastrar(Cliente cliente) {
-		this.cadastro.cadastrar(cliente);
+		if (this.cadastro.buscar(cliente.getLogin()) == null)
+			this.cadastro.cadastrar(cliente);
 	}
 
 	public Cliente buscar(String login) {
