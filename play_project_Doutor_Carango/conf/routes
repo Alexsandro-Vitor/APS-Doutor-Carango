@@ -10,8 +10,8 @@ GET     /count                      controllers.CountController.count
 GET     /message                    controllers.AsyncController.message
 
 GET     /clientes/adicao   controllers.ClientesController.adicaoCliente
-GET     /clientes/busca    controllers.ClientesController.buscaCliente
-GET     /clientes/remocao  controllers.ClientesController.remocaoCliente
+GET     /clientes/info/:login    controllers.ClientesController.infoCliente(login: String)
+GET     /clientes/remocao/:login  controllers.ClientesController.remocaoCliente(login: String)
 
 GET     /oficinas/adicao   controllers.OficinasController.adicaoOficina
 GET     /oficinas/busca    controllers.OficinasController.buscaOficina

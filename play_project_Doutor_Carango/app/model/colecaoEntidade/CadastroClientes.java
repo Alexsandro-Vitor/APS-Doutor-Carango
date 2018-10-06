@@ -39,12 +39,16 @@ public class CadastroClientes {
 	/**
 	 * Remove um Cliente
 	 * @param nome O login do Cliente buscado
+	 * @return true se havia um cliente com aquele login, false caso contrário.
 	 */
-	public void remover(String login) {
+	public boolean remover(String login) {
 		ListIterator<Cliente> iterator = this.lista.listIterator();
 		while (iterator.hasNext()) {
-			if (iterator.next().getLogin().equals(login))
+			if (iterator.next().getLogin().equals(login)) {
 				iterator.remove();
+				return true;
+			}
 		}
+		return false;
 	}
 }

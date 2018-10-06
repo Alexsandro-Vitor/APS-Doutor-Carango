@@ -1,13 +1,9 @@
 package model.negocio;
 
-import java.util.ArrayList;
-
-import javax.inject.*;
-
 import model.entidade.Cliente;
 import model.colecaoEntidade.CadastroClientes;
 
-public class ControladorClientes {
+public class NegocioClientes {
 	private CadastroClientes cadastro;
 
 	public ControladorClientes() {
@@ -23,7 +19,7 @@ public class ControladorClientes {
 		return this.cadastro.buscar(login);
 	}
 
-	public void remover(String login) {
-		this.cadastro.remover(login);
+	public boolean remover(String login) {
+		return this.cadastro.remover(login);
 	}
 }

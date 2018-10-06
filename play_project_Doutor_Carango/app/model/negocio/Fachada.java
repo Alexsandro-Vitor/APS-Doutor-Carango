@@ -1,17 +1,17 @@
 package model.negocio;
 
 import model.entidade.Cliente;
-import model.negocio.ControladorClientes;
+import model.negocio.NegocioClientes;
 
 import model.entidade.Oficina;
 import model.negocio.ControladorOficinas;
 
 public class Fachada {
-	private ControladorClientes clientes;
+	private NegocioClientes clientes;
 	private ControladorOficinas oficinas;
 
 	public Fachada() {
-		clientes = new ControladorClientes();
+		clientes = new NegocioClientes();
 		this.clientes.cadastrar(new Cliente("A", "aaa", "1234"));
 		this.clientes.cadastrar(new Cliente("B", "baa", "1234"));
 		this.clientes.cadastrar(new Cliente("C", "caa", "1234"));
@@ -28,8 +28,8 @@ public class Fachada {
 		return this.clientes.buscar(login);
 	}
 
-	public void removerCliente(String login) {
-		this.clientes.remover(login);
+	public boolean removerCliente(String login) {
+		return this.clientes.remover(login);
 	}
 
 	public void cadastrarOficina(String nome, String endereco) {
