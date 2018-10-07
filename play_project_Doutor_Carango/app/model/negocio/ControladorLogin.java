@@ -35,6 +35,6 @@ public class ControladorLogin {
 	private boolean validacaoLogin(String login, String senha) {
 		Cliente cliente = this.cadastro.buscar(login);
 		return cliente != null
-			&& cliente.getSenha().equals(senha);
+			&& cliente.checkSenha(senha);
 	}
 }
