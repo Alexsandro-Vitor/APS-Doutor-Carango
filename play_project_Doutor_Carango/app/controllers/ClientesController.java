@@ -27,8 +27,7 @@ public class ClientesController extends Controller {
 	}
 	
 	public Result adicaoCliente() {
-		fachada.cadastrarCliente("A", "aaa", "1234");
-		return ok("Cliente \"aaa\" cadastrado");
+		return ok(adicaoCliente.render());
 	}
 	
     public Result infoCliente(String login) {
