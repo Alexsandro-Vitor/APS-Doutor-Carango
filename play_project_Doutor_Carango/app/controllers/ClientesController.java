@@ -20,6 +20,10 @@ public class ClientesController extends Controller {
     public ClientesController(Fachada fachada) {
        this.fachada = fachada;
 	}
+
+	public Result index() {
+		return TODO;
+	}
 	
 	public Result adicaoCliente() {
 		fachada.cadastrarCliente("A", "aaa", "1234");

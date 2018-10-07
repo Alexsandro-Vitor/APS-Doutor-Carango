@@ -1,16 +1,15 @@
 package model.colecaoEntidade;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.ListIterator;
+import java.util.Map;
+import java.util.HashMap;
 
 import model.entidade.Cliente;
 
 public class CadastroClientes {
-	private ArrayList<Cliente> lista;
+	private Map<String, Cliente> clientes;
 
 	public CadastroClientes() {
-		lista = new ArrayList();
+		clientes = new HashMap<String, Cliente>();
 	}
 
 	/**
@@ -18,7 +17,7 @@ public class CadastroClientes {
 	 * @param cliente O novo Cliente
 	 */
 	public void cadastrar(Cliente cliente) {
-		this.lista.add(cliente);
+		this.clientes.put(cliente.getLogin(), cliente);
 	}
 
 	/**
@@ -27,13 +26,7 @@ public class CadastroClientes {
 	 * @return O Cliente com o login dado
 	 */
 	public Cliente buscar(String login) {
-		ListIterator<Cliente> iterator = this.lista.listIterator();
-		while (iterator.hasNext()) {
-			Cliente temp = iterator.next();
-			if (temp.getLogin().equals(login))
-				return temp;
-		}
-		return null;
+		return this.clientes.get(login);
 	}
 
 	/**
@@ -42,13 +35,8 @@ public class CadastroClientes {
 	 * @return true se havia um cliente com aquele login, false caso contrário.
 	 */
 	public boolean remover(String login) {
-		ListIterator<Cliente> iterator = this.lista.listIterator();
-		while (iterator.hasNext()) {
-			if (iterator.next().getLogin().equals(login)) {
-				iterator.remove();
-				return true;
-			}
-		}
-		return false;
+		boolean saida = this.clientes.containsKey(login);
+		this.clientes.remove(login);
+		return saida;
 	}
 }

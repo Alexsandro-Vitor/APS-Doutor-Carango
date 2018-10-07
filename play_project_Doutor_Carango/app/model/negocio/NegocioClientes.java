@@ -6,7 +6,7 @@ import model.colecaoEntidade.CadastroClientes;
 public class NegocioClientes {
 	private CadastroClientes cadastro;
 
-	public ControladorClientes() {
+	public NegocioClientes() {
 		cadastro = new CadastroClientes();
 	}
 
