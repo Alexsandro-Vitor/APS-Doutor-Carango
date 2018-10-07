@@ -21,6 +21,13 @@ public class Fachada {
 		this.oficinas.cadastrar(new Oficina("Oficina", "Endereço", 0));
 	}
 
+	private static Fachada instance;
+	public static Fachada getInstance() {
+		if (Fachada.instance == null)
+			Fachada.instance = new Fachada();
+		return Fachada.instance;
+	}
+
 	public Cliente[] listarClientes() {
 		return this.clientes.listar();
 	}

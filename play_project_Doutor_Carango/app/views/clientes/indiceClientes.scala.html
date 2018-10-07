@@ -10,8 +10,8 @@
 		<ul>
 		@for(cliente <- clientes) {
 			<li><b>@cliente.getLogin() - @cliente.getNome()</b><br>
-			<a href="clientes/info/@cliente.getLogin()">Info</a> |
-			<a href="clientes/remocao/@cliente.getLogin()">Remover</a></li>
+			<a href="info/@cliente.getLogin()">Info</a> |
+			<a href="remocao/@cliente.getLogin()">Remover</a></li>
 		}
 		</ul>
 	</body>

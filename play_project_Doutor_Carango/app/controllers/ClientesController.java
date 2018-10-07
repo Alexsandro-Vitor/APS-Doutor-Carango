@@ -14,11 +14,11 @@ import views.html.clientes.*;
 @Singleton
 public class ClientesController extends Controller {
 
-    private final Fachada fachada;
+	private final Fachada fachada;
 
-    @Inject
-    public ClientesController(Fachada fachada) {
-       this.fachada = fachada;
+	@Inject
+	public ClientesController() {
+		this.fachada = Fachada.getInstance();
 	}
 
 	public Result index() {
@@ -30,11 +30,11 @@ public class ClientesController extends Controller {
 		return ok(adicaoCliente.render());
 	}
 	
-    public Result infoCliente(String login) {
+	public Result infoCliente(String login) {
 		Cliente cliente = fachada.buscarCliente(login);
 		if (cliente == null)
 			return ok(clienteNaoExiste.render(login));
-        return ok(infoCliente.render(login, cliente.getNome()));
+		return ok(infoCliente.render(login, cliente.getNome()));
 	}
 	
 	public Result remocaoCliente(String login) {
