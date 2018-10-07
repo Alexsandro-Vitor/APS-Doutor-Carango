@@ -1,0 +1,18 @@
+@(clientes : Array[model.entidade.Cliente])
+
+<html>
+	<head>
+		<title>Clientes - Doutor Carango</title>
+	</head>
+	<body>
+		<h1>Clientes</h1>
+		<p>Adicionar Cliente</p>
+		<ul>
+		@for(cliente <- clientes) {
+			<li><b>@cliente.getLogin() - @cliente.getNome()</b><br>
+			<a href="clientes/info/@cliente.getLogin()">Info</a> |
+			<a href="clientes/remocao/@cliente.getLogin()">Remover</a></li>
+		}
+		</ul>
+	</body>
+</html>

@@ -10,6 +10,10 @@ public class NegocioClientes {
 		cadastro = new CadastroClientes();
 	}
 
+	public Cliente[] listar() {
+		return this.cadastro.listar();
+	}
+
 	public void cadastrar(Cliente cliente) {
 		if (this.cadastro.buscar(cliente.getLogin()) == null)
 			this.cadastro.cadastrar(cliente);

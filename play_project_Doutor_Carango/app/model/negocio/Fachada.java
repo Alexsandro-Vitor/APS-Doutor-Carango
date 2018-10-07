@@ -12,12 +12,17 @@ public class Fachada {
 
 	public Fachada() {
 		clientes = new NegocioClientes();
-		this.clientes.cadastrar(new Cliente("A", "aaa", "1234"));
-		this.clientes.cadastrar(new Cliente("B", "baa", "1234"));
-		this.clientes.cadastrar(new Cliente("C", "caa", "1234"));
+		this.clientes.cadastrar(new Cliente("Alexsandro Vítor Serafim de Carvalho", "avsc", "1234"));
+		this.clientes.cadastrar(new Cliente("Raquel Maria Santos de Oliveira", "rmso", "1234"));
+		this.clientes.cadastrar(new Cliente("Rodolfo Jose de Souza Rocha", "rjsr", "1234"));
+		this.clientes.cadastrar(new Cliente("Orlando Verdasca Aceto", "ova", "1234"));
 		oficinas = new ControladorOficinas();
 		this.oficinas.cadastrar(new Oficina("Optimus", "Cybertron", 0));
 		this.oficinas.cadastrar(new Oficina("Oficina", "Endereço", 0));
+	}
+
+	public Cliente[] listarClientes() {
+		return this.clientes.listar();
 	}
 
 	public void cadastrarCliente(String nome, String login, String senha) {

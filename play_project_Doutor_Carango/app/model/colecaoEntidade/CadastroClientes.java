@@ -2,6 +2,8 @@ package model.colecaoEntidade;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 
 import model.entidade.Cliente;
 
@@ -9,7 +11,20 @@ public class CadastroClientes {
 	private Map<String, Cliente> clientes;
 
 	public CadastroClientes() {
-		clientes = new HashMap<String, Cliente>();
+		this.clientes = new HashMap<String, Cliente>();
+	}
+
+	/**
+	 * Gera um array com todos os Clientes da base de dados
+	 * @return Todos os clientes em um array
+	 */
+	public Cliente[] listar() {
+		Cliente[] saida = new Cliente[this.clientes.size()];
+		int i = 0;
+		for (String key : this.clientes.keySet()) {
+			saida[i++] = this.clientes.get(key);
+		}
+		return saida;
 	}
 
 	/**

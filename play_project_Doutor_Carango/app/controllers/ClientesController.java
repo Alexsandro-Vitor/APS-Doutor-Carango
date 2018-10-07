@@ -22,7 +22,8 @@ public class ClientesController extends Controller {
 	}
 
 	public Result index() {
-		return TODO;
+		Cliente[] clientes = this.fachada.listarClientes();
+		return ok(indiceClientes.render(clientes));
 	}
 	
 	public Result adicaoCliente() {
