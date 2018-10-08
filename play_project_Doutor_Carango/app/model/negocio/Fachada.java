@@ -32,8 +32,8 @@ public class Fachada {
 		return this.clientes.listar();
 	}
 
-	public void cadastrarCliente(String nome, String login, String senha) {
-		this.clientes.cadastrar(new Cliente(nome, login, senha));
+	public boolean cadastrarCliente(Cliente cliente) {
+		return this.clientes.cadastrar(cliente);
 	}
 
 	public Cliente buscarCliente(String login) {

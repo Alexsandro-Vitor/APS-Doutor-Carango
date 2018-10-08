@@ -14,9 +14,12 @@ public class NegocioClientes {
 		return this.cadastro.listar();
 	}
 
-	public void cadastrar(Cliente cliente) {
-		if (this.cadastro.buscar(cliente.getLogin()) == null)
+	public boolean cadastrar(Cliente cliente) {
+		if (this.cadastro.buscar(cliente.getLogin()) == null 
+			&& cliente.getLogin().length() >= 3 && cliente.tamSenha() >= 4) {
 			this.cadastro.cadastrar(cliente);
+			return true;
+		} return false;
 	}
 
 	public Cliente buscar(String login) {

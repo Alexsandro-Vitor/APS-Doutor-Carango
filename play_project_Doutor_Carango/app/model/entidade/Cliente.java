@@ -32,6 +32,10 @@ public class Cliente {
 		return this.senha.equals(senha);
 	}
 
+	public int tamSenha() {
+		return this.senha.length();
+	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
