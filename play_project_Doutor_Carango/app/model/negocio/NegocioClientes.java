@@ -1,10 +1,11 @@
 package model.negocio;
 
 import model.entidade.Cliente;
+import model.interfaces.IRepositorioClientes;
 import model.colecaoEntidade.CadastroClientes;
 
 public class NegocioClientes {
-	private CadastroClientes cadastro;
+	private IRepositorioClientes cadastro;
 
 	public NegocioClientes() {
 		cadastro = new CadastroClientes();
@@ -28,6 +29,8 @@ public class NegocioClientes {
 	}
 
 	public boolean remover(String login) {
-		return this.cadastro.remover(login);
+		boolean saida = this.cadastro.buscar(login) != null;
+		this.cadastro.remover(login);
+		return saida;
 	}
 }

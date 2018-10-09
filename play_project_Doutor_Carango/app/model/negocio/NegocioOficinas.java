@@ -1,10 +1,11 @@
 package model.negocio;
 
 import model.entidade.Oficina;
+import model.interfaces.IRepositorioOficinas;
 import model.colecaoEntidade.CadastroOficinas;
 
 public class NegocioOficinas {
-	private CadastroOficinas cadastro;
+	private IRepositorioOficinas cadastro;
 
 	public NegocioOficinas() {
 		cadastro = new CadastroOficinas();
@@ -23,6 +24,8 @@ public class NegocioOficinas {
 	}
 
 	public boolean remover(String nome) {
-		return this.cadastro.remover(nome);
+		boolean saida = this.cadastro.buscar(nome) != null;
+		this.cadastro.remover(nome);
+		return saida;
 	}
 }

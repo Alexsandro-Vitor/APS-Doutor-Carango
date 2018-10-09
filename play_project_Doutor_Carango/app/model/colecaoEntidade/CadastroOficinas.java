@@ -1,18 +1,13 @@
 package model.colecaoEntidade;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.ListIterator;
-
 import java.util.Map;
 import java.util.HashMap;
 
 import model.entidade.Oficina;
+import model.interfaces.IRepositorioOficinas;
 
-public class CadastroOficinas {
+public class CadastroOficinas implements IRepositorioOficinas {
 	private Map<String, Oficina> oficinas;
-	private ArrayList<Oficina> lista;
 
 	public CadastroOficinas() {
 		this.oficinas = new HashMap<String, Oficina>();
@@ -47,12 +42,9 @@ public class CadastroOficinas {
 	/**
 	 * Remove uma Oficina
 	 * @param nome O login da Oficina buscada
-	 * @return true se havia uma Oficina com aquele login, false caso contrário.
 	 */
-	public boolean remover(String nome) {
-		boolean saida = this.oficinas.containsKey(nome);
+	public void remover(String nome) {
 		this.oficinas.remove(nome);
-		return saida;
 	}
 
 	/**

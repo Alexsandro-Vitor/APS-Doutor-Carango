@@ -4,8 +4,9 @@ import java.util.Map;
 import java.util.HashMap;
 
 import model.entidade.Cliente;
+import model.interfaces.IRepositorioClientes;
 
-public class CadastroClientes {
+public class CadastroClientes implements IRepositorioClientes {
 	private Map<String, Cliente> clientes;
 
 	public CadastroClientes() {
@@ -45,11 +46,8 @@ public class CadastroClientes {
 	/**
 	 * Remove um Cliente
 	 * @param nome O login do Cliente buscado
-	 * @return true se havia um cliente com aquele login, false caso contrário.
 	 */
-	public boolean remover(String login) {
-		boolean saida = this.clientes.containsKey(login);
+	public void remover(String login) {
 		this.clientes.remove(login);
-		return saida;
 	}
 }
