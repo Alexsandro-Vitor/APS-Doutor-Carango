@@ -1,0 +1,19 @@
+@(oficinas : Array[model.entidade.Oficina])
+
+<html>
+	<head>
+		<title>Oficinas - Doutor Carango</title>
+	</head>
+	<body>
+		<h1>Oficinas</h1>
+		<p><a href="oficinas/adicao">Adicionar Oficina</a></p>
+		<ul>
+		@for(oficina <- oficinas) {
+			<li><b>@oficina.getNome()</b><br>
+			<a href="/oficinas/info/@oficina.getNome()">Info</a> |
+			<a href="/oficinas/remocao/@oficina.getNome()">Remover</a></li>
+		}
+		</ul>
+		<p><a href="/">Voltar à página inicial</a></p>
+	</body>
+</html>

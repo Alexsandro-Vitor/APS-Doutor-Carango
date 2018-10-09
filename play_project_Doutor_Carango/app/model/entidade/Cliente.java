@@ -1,9 +1,13 @@
 package model.entidade;
 
+import com.typesafe.config.ConfigException.Null;
+
 public class Cliente {
 	private String nome;
 	private String login;
 	private String senha;
+
+	public Cliente() {}
 
 	public Cliente(String nome, String login, String senha) {
 		this.nome = nome;
@@ -33,6 +37,8 @@ public class Cliente {
 	}
 
 	public int tamSenha() {
+		if (this.senha == null)
+			return 0;
 		return this.senha.length();
 	}
 

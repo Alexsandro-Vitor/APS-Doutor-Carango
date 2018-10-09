@@ -6,12 +6,12 @@
 	</head>
 	<body>
 		<h1>Clientes</h1>
-		<p><a href="clientes/adicao">Adicionar Cliente</a></p>
+		<p><a href="/clientes/adicao">Adicionar Cliente</a></p>
 		<ul>
 		@for(cliente <- clientes) {
 			<li><b>@cliente.getLogin() - @cliente.getNome()</b><br>
-			<a href="info/@cliente.getLogin()">Info</a> |
-			<a href="remocao/@cliente.getLogin()">Remover</a></li>
+			<a href="/clientes/info/@cliente.getLogin()">Info</a> |
+			<a href="/clientes/remocao/@cliente.getLogin()">Remover</a></li>
 		}
 		</ul>
 		<p><a href="/">Voltar à página inicial</a></p>

@@ -15,8 +15,9 @@ public class NegocioClientes {
 	}
 
 	public boolean cadastrar(Cliente cliente) {
-		if (this.cadastro.buscar(cliente.getLogin()) == null 
-			&& cliente.getLogin().length() >= 3 && cliente.tamSenha() >= 4) {
+		if (cliente.getLogin() != null && cliente.getNome() != null
+				&& this.cadastro.buscar(cliente.getLogin()) == null
+				&& cliente.getLogin().length() >= 3 && cliente.tamSenha() >= 4) {
 			this.cadastro.cadastrar(cliente);
 			return true;
 		} return false;

@@ -4,11 +4,11 @@ import model.entidade.Cliente;
 import model.negocio.NegocioClientes;
 
 import model.entidade.Oficina;
-import model.negocio.ControladorOficinas;
+import model.negocio.NegocioOficinas;
 
 public class Fachada {
 	private NegocioClientes clientes;
-	private ControladorOficinas oficinas;
+	private NegocioOficinas oficinas;
 
 	public Fachada() {
 		clientes = new NegocioClientes();
@@ -16,7 +16,7 @@ public class Fachada {
 		this.clientes.cadastrar(new Cliente("Raquel Maria Santos de Oliveira", "rmso", "1234"));
 		this.clientes.cadastrar(new Cliente("Rodolfo Jose de Souza Rocha", "rjsr", "1234"));
 		this.clientes.cadastrar(new Cliente("Orlando Verdasca Aceto", "ova", "1234"));
-		oficinas = new ControladorOficinas();
+		oficinas = new NegocioOficinas();
 		this.oficinas.cadastrar(new Oficina("Optimus", "Cybertron", 0));
 		this.oficinas.cadastrar(new Oficina("Oficina", "Endereço", 0));
 	}
@@ -44,15 +44,19 @@ public class Fachada {
 		return this.clientes.remover(login);
 	}
 
-	public void cadastrarOficina(String nome, String endereco) {
-		this.oficinas.cadastrar(new Oficina(nome, endereco, 0));
+	public Oficina[] listarOficinas() {
+		return this.oficinas.listar();
+	}
+
+	public void cadastrarOficina(Oficina oficina) {
+		this.oficinas.cadastrar(oficina);
 	}
 
 	public Oficina buscarOficina(String nome) {
 		return this.oficinas.buscar(nome);
 	}
 
-	public void removerOficina(String nome) {
-		this.oficinas.remover(nome);
+	public boolean removerOficina(String nome) {
+		return this.oficinas.remover(nome);
 	}
 }

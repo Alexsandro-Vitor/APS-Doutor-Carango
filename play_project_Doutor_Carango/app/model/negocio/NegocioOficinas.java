@@ -1,17 +1,17 @@
 package model.negocio;
 
-import java.util.ArrayList;
-
-import javax.inject.*;
-
 import model.entidade.Oficina;
 import model.colecaoEntidade.CadastroOficinas;
 
-public class ControladorOficinas {
+public class NegocioOficinas {
 	private CadastroOficinas cadastro;
 
-	public ControladorOficinas() {
+	public NegocioOficinas() {
 		cadastro = new CadastroOficinas();
+	}
+
+	public Oficina[] listar() {
+		return this.cadastro.listar();
 	}
 
 	public void cadastrar(Oficina oficina) {
@@ -22,7 +22,7 @@ public class ControladorOficinas {
 		return this.cadastro.buscar(nome);
 	}
 
-	public void remover(String nome) {
-		this.cadastro.remover(nome);
+	public boolean remover(String nome) {
+		return this.cadastro.remover(nome);
 	}
 }
