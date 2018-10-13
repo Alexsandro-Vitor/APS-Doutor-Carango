@@ -47,16 +47,19 @@ public class ClientesController extends Controller {
 	public Result adicionarCliente() {
 		Form<Cliente> form = formFactory.form(Cliente.class).bindFromRequest();
 		Cliente cliente = new Cliente(form.rawData());
-		if (this.fachada.cadastrarCliente(cliente))
+		try {
+			this.fachada.cadastrarCliente(cliente);
 			return created(adicaoClienteSucesso.render(cliente.getLogin()));
-		return badRequest(adicaoClienteFalha.render("Erro desconhecido"));
+		} catch (Exception e) {
+			return badRequest(adicaoClienteFalha.render(e.getMessage()));
+		}
 	}
 	
 	public Result infoCliente(String login) {
 		Cliente cliente = fachada.buscarCliente(login);
 		if (cliente == null)
 			return notFound(clienteNaoExiste.render(login));
-		return ok(infoCliente.render(login, cliente.getNome()));
+		return ok(infoCliente.render(cliente));
 	}
 	
 	public Result remocaoCliente(String login) {

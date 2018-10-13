@@ -1,12 +1,13 @@
-@(login: String, name: String)
+@(cliente: model.entidade.Cliente)
 
 <html>
 	<head>
-		<title>@login - Doutor Carango</title>
+		<title>@cliente.getLogin() - Doutor Carango</title>
 	</head>
 	<body>
-		<h1>Cliente: @login</h1>
-		<p><b>Nome:</b> @name</p>
+		<h1>Cliente: @cliente.getLogin()</h1>
+		<p><b>Nome:</b> @cliente.getNome()</p>
+		<p><a href="/clientes/info/@cliente.getLogin()/edit/">Editar informações</a></p>
 		<p><a href="/clientes/">Voltar para a lista de Clientes</a></p>
 	</body>
 </html>

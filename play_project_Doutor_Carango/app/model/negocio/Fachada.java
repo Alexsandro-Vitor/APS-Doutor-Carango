@@ -1,6 +1,10 @@
 package model.negocio;
 
 import model.entidade.Cliente;
+import model.excecoes.LoginJaExisteException;
+import model.excecoes.LoginPequenoException;
+import model.excecoes.NomeVazioException;
+import model.excecoes.SenhaPequenaException;
 import model.negocio.NegocioClientes;
 
 import model.entidade.Oficina;
@@ -12,13 +16,15 @@ public class Fachada {
 
 	public Fachada() {
 		clientes = new NegocioClientes();
-		this.clientes.cadastrar(new Cliente("Alexsandro Vítor Serafim de Carvalho", "avsc", "1234"));
-		this.clientes.cadastrar(new Cliente("Raquel Maria Santos de Oliveira", "rmso", "1234"));
-		this.clientes.cadastrar(new Cliente("Rodolfo Jose de Souza Rocha", "rjsr", "1234"));
-		this.clientes.cadastrar(new Cliente("Orlando Verdasca Aceto", "ova", "1234"));
-		oficinas = new NegocioOficinas();
-		this.oficinas.cadastrar(new Oficina("Optimus", "Cybertron", 0));
-		this.oficinas.cadastrar(new Oficina("Oficina", "Endereço", 0));
+		try {
+			this.clientes.cadastrar(new Cliente("Alexsandro Vítor Serafim de Carvalho", "avsc", "1234"));
+			this.clientes.cadastrar(new Cliente("Raquel Maria Santos de Oliveira", "rmso", "1234"));
+			this.clientes.cadastrar(new Cliente("Rodolfo Jose de Souza Rocha", "rjsr", "1234"));
+			this.clientes.cadastrar(new Cliente("Orlando Verdasca Aceto", "ova", "1234"));
+			oficinas = new NegocioOficinas();
+			this.oficinas.cadastrar(new Oficina("Optimus", "Cybertron", 0));
+			this.oficinas.cadastrar(new Oficina("Oficina", "Endereço", 0));
+		} catch (Exception e) {}
 	}
 
 	private static Fachada instance;
@@ -32,8 +38,9 @@ public class Fachada {
 		return this.clientes.listar();
 	}
 
-	public boolean cadastrarCliente(Cliente cliente) {
-		return this.clientes.cadastrar(cliente);
+	public void cadastrarCliente(Cliente cliente) throws LoginPequenoException, NomeVazioException,
+			SenhaPequenaException, LoginJaExisteException {
+		this.clientes.cadastrar(cliente);
 	}
 
 	public Cliente buscarCliente(String login) {
