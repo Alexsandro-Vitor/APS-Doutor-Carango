@@ -5,17 +5,17 @@
 # Home page
 GET		/							controllers.HomeController.index
 
-GET		/clientes					controllers.ClientesController.index
-GET		/clientes/adicao			controllers.ClientesController.adicaoCliente
-POST	/clientes/adicao			controllers.ClientesController.adicionarCliente
-GET		/clientes/info/:login		controllers.ClientesController.infoCliente(login: String)
-GET		/clientes/remocao/:login	controllers.ClientesController.remocaoCliente(login: String)
+GET		/clientes/					controllers.ClientesController.index
+GET		/clientes/adicao/			controllers.ClientesController.adicaoCliente
+POST	/clientes/adicao/			controllers.ClientesController.adicionarCliente
+GET		/clientes/info/:login/		controllers.ClientesController.infoCliente(login: String)
+GET		/clientes/remocao/:login/	controllers.ClientesController.remocaoCliente(login: String)
 
 # Oficinas
-GET		/oficinas					controllers.OficinasController.index
-GET		/oficinas/adicao			controllers.OficinasController.adicaoOficina
-GET		/oficinas/info/:nome		controllers.OficinasController.infoOficina(nome: String)
-GET		/oficinas/remocao/:nome		controllers.OficinasController.remocaoOficina(nome: String)
+GET		/oficinas/					controllers.OficinasController.index
+GET		/oficinas/adicao/			controllers.OficinasController.adicaoOficina
+GET		/oficinas/info/:nome/		controllers.OficinasController.infoOficina(nome: String)
+GET		/oficinas/remocao/:nome/	controllers.OficinasController.remocaoOficina(nome: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET		/assets/*file				controllers.Assets.versioned(path="/public", file: Asset)

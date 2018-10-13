@@ -32,35 +32,37 @@ public class ClientesController extends Controller {
 		return ok(indiceClientes.render(clientes));
 	}
 	
+	/**
+	 * Gera a tela de adição de Clientes.
+	 * @return A tela de adição de Clientes.
+	 */
 	public Result adicaoCliente() {
 		return ok(adicaoCliente.render(formFactory.form(Cliente.class)));
 	}
 
+	/**
+	 * Adiciona o Cliente com as informações da tela de adição de Clientes.
+	 * @return Um redirecionamento para outra tela.
+	 */
 	public Result adicionarCliente() {
-		Form<Cliente> form = formFactory.form(Cliente.class);
-		Map<String, String> data = form.rawData();
-		String saida = "" + data.size();
-		for (String key : data.keySet()) {
-			saida += "<"+key+", "+data.get(key)+">";
-		}
-		return ok(clienteNaoExiste.render(saida));
-		/*Cliente cliente = form.get();
+		Form<Cliente> form = formFactory.form(Cliente.class).bindFromRequest();
+		Cliente cliente = new Cliente(form.rawData());
 		if (this.fachada.cadastrarCliente(cliente))
-			return redirect(routes.ClientesController.index());
-		return redirect(routes.HomeController.index());*/
+			return created(adicaoClienteSucesso.render(cliente.getLogin()));
+		return badRequest(adicaoClienteFalha.render("Erro desconhecido"));
 	}
 	
 	public Result infoCliente(String login) {
 		Cliente cliente = fachada.buscarCliente(login);
 		if (cliente == null)
-			return ok(clienteNaoExiste.render(login));
+			return notFound(clienteNaoExiste.render(login));
 		return ok(infoCliente.render(login, cliente.getNome()));
 	}
 	
 	public Result remocaoCliente(String login) {
 		if (fachada.removerCliente(login))
 			return ok(remocaoClienteSucesso.render(login));
-		return ok(clienteNaoExiste.render(login));
+		return notFound(clienteNaoExiste.render(login));
 	}
 
 }
