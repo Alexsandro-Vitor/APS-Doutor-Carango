@@ -1,0 +1,29 @@
+@(clienteForm : Form[model.entidade.Cliente], cliente : model.entidade.Cliente)
+@import helper._
+
+<html>
+	<head>
+		<title>Editar Cliente - Doutor Carango</title>
+	</head>
+	<body>
+		<h1>Editando Cliente @cliente.getLogin()</h1>
+		@helper.form(action = helper.CSRF(routes.ClientesController.editarCliente(cliente.getLogin()))){
+			<p>
+				<label for="senha_atual"><b>Senha Atual:</b></label>
+				<input type="text" id="senha_atual" name="Senha Atual">
+			</p>
+			A senha atual é necessária para alterar os dados do Cliente
+			<p>
+				<label for="nome"><b>Nome:</b></label>
+				<input type="text" id="nome" name="Nome" placeholder="@cliente.getNome()" size="50">
+			</p>
+			<p>
+				<label for="nova_senha"><b>Nova Senha:</b></label>
+				<input type="text" id="nova_senha" name="Nova Senha">
+			</p>
+
+			<input type="submit" value="Salvar alterações">
+		}
+		<p><a href="/clientes/">Voltar para a lista de Clientes</a></p>
+	</body>
+</html>

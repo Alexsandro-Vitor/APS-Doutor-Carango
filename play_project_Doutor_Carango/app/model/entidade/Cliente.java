@@ -44,7 +44,7 @@ public class Cliente {
 	 * @param nome - O novo nome do Cliente.
 	 */
 	public void setNome(String nome) {
-		this.nome = nome;
+		if (nome != null) this.nome = nome;
 	}
 
 	/**
@@ -79,6 +79,6 @@ public class Cliente {
 	 * @param senha - A nova senha.
 	 */
 	public void setSenha(String senha) {
-		this.senha = senha;
+		if (senha != null) this.senha = senha;
 	}
 }

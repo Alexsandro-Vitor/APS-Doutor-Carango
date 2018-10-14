@@ -1,9 +1,12 @@
 package model.negocio;
 
+import java.util.Map;
+
 import model.entidade.Cliente;
 import model.excecoes.LoginJaExisteException;
 import model.excecoes.LoginPequenoException;
 import model.excecoes.NomeVazioException;
+import model.excecoes.SenhaIncorretaException;
 import model.excecoes.SenhaPequenaException;
 import model.interfaces.IRepositorioClientes;
 import model.colecaoEntidade.CadastroClientes;
@@ -35,6 +38,19 @@ public class NegocioClientes {
 
 	public Cliente buscar(String login) {
 		return this.cadastro.buscar(login);
+	}
+
+	public void editar(String login, Map<String, String> map)
+			throws SenhaIncorretaException, SenhaPequenaException {
+		Cliente cliente = this.cadastro.buscar(login);
+		if (!cliente.checkSenha(map.get("Senha Atual")))
+			throw new SenhaIncorretaException();
+		String senha = map.get("Nova Senha");
+		if (senha == null || senha.length() < SenhaPequenaException.TAM_MINIMO)
+			throw new SenhaPequenaException();
+
+		cliente.setNome(map.get("Nome"));
+		cliente.setSenha(senha);
 	}
 
 	public boolean remover(String login) {

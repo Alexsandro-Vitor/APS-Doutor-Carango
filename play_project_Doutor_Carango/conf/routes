@@ -9,6 +9,8 @@ GET		/clientes/					controllers.ClientesController.index
 GET		/clientes/adicao/			controllers.ClientesController.adicaoCliente
 POST	/clientes/adicao/			controllers.ClientesController.adicionarCliente
 GET		/clientes/info/:login/		controllers.ClientesController.infoCliente(login: String)
+GET		/clientes/info/:login/edit/	controllers.ClientesController.edicaoCliente(login: String)
+POST	/clientes/info/:login/edit/	controllers.ClientesController.editarCliente(login: String)
 GET		/clientes/remocao/:login/	controllers.ClientesController.remocaoCliente(login: String)
 
 # Oficinas

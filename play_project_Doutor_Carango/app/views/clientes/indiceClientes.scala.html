@@ -11,6 +11,7 @@
 		@for(cliente <- clientes) {
 			<li><b>@cliente.getLogin() - @cliente.getNome()</b><br>
 			<a href="/clientes/info/@cliente.getLogin()/">Info</a> |
+			<a href="/clientes/info/@cliente.getLogin()/edit/">Editar</a> |
 			<a href="/clientes/remocao/@cliente.getLogin()/">Remover</a></li>
 		}
 		</ul>

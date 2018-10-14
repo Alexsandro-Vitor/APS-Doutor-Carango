@@ -8,10 +8,18 @@
 	<body>
 		<h1>Cadastro de Cliente</h1>
 		@helper.form(action = helper.CSRF(routes.ClientesController.adicionarCliente())){
-			@helper.inputText(clienteForm("Nome"))
-			@helper.inputText(clienteForm("Login"))
-			@helper.inputPassword(clienteForm("Senha"))
-
+			<p>
+				<label for="nome"><b>Nome:</b></label>
+				<input type="text" id="nome" name="Nome">
+			</p>
+			<p>
+				<label for="login"><b>Login:</b></label>
+				<input type="text" id="login" name="Login">
+			</p>
+			<p>
+				<label for="senha"><b>Senha:</b></label>
+				<input type="text" id="senha" name="Senha">
+			</p>
 			<input type="submit" value="Cadastrar">
 		}
 		<p><a href="/clientes/">Voltar para a lista de Clientes</a></p>

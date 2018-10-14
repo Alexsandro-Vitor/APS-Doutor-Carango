@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import views.html.clientes.*;
+import views.html.erros.ErroOperacaoFalhou;
 
 @Singleton
 public class ClientesController extends Controller {
@@ -51,7 +52,9 @@ public class ClientesController extends Controller {
 			this.fachada.cadastrarCliente(cliente);
 			return created(adicaoClienteSucesso.render(cliente.getLogin()));
 		} catch (Exception e) {
-			return badRequest(adicaoClienteFalha.render(e.getMessage()));
+			return badRequest(ErroOperacaoFalhou.render(
+				e.getMessage(), "O cliente não pôde ser adicionado",
+				"/clientes/adicao/", "Voltar à tela de Adicionar Clientes"));
 		}
 	}
 	
@@ -60,6 +63,26 @@ public class ClientesController extends Controller {
 		if (cliente == null)
 			return notFound(clienteNaoExiste.render(login));
 		return ok(infoCliente.render(cliente));
+	}
+
+	public Result edicaoCliente(String login) {
+		Cliente cliente = fachada.buscarCliente(login);
+		if (cliente == null)
+			return notFound(clienteNaoExiste.render(login));
+		return ok(edicaoCliente.render(formFactory.form(Cliente.class), cliente));
+	}
+
+	public Result editarCliente(String login) {
+		Form<Cliente> form = formFactory.form(Cliente.class).bindFromRequest();
+		Map<String, String> map = form.rawData();
+		try {
+			this.fachada.editarCliente(login, map);
+			return this.ok(edicaoClienteSucesso.render(login));
+		} catch (Exception e) {
+			return unauthorized(ErroOperacaoFalhou.render(
+				e.getMessage(), "O cliente não pôde ser atualizado",
+				"/clientes/info/" + login + "/edit/", "Voltar à tela de Editar Clientes"));
+		}
 	}
 	
 	public Result remocaoCliente(String login) {

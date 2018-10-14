@@ -9,6 +9,6 @@ public class SenhaPequenaException extends Exception {
 	 */
 	public static final int TAM_MINIMO = 4;
 	public SenhaPequenaException() {
-		super("A senha precisa ter, no mínimo, "+ SenhaPequenaException.TAM_MINIMO +" caracteres.");
+		super("Uma senha precisa ter, no mínimo, "+ SenhaPequenaException.TAM_MINIMO +" caracteres.");
 	}
 }

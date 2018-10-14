@@ -1,9 +1,12 @@
 package model.negocio;
 
+import java.util.Map;
+
 import model.entidade.Cliente;
 import model.excecoes.LoginJaExisteException;
 import model.excecoes.LoginPequenoException;
 import model.excecoes.NomeVazioException;
+import model.excecoes.SenhaIncorretaException;
 import model.excecoes.SenhaPequenaException;
 import model.negocio.NegocioClientes;
 
@@ -45,6 +48,11 @@ public class Fachada {
 
 	public Cliente buscarCliente(String login) {
 		return this.clientes.buscar(login);
+	}
+
+	public void editarCliente(String login, Map<String, String> map)
+			throws SenhaIncorretaException, SenhaPequenaException {
+		this.clientes.editar(login, map);
 	}
 
 	public boolean removerCliente(String login) {
