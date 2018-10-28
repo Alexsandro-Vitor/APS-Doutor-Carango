@@ -5,6 +5,7 @@ import java.util.Map;
 import model.entidade.Cliente;
 import model.excecoes.LoginJaExisteException;
 import model.excecoes.LoginPequenoException;
+import model.excecoes.LoginInvalidoException;
 import model.excecoes.NomeVazioException;
 import model.excecoes.SenhaIncorretaException;
 import model.excecoes.SenhaPequenaException;
@@ -22,10 +23,12 @@ public class NegocioClientes {
 		return this.cadastro.listar();
 	}
 
-	public void cadastrar(Cliente cliente) throws LoginPequenoException, NomeVazioException,
-			SenhaPequenaException, LoginJaExisteException {
+	public void cadastrar(Cliente cliente) throws LoginPequenoException, LoginInvalidoException,
+			NomeVazioException, SenhaPequenaException, LoginJaExisteException {
 		if (cliente.getLogin() == null || cliente.getLogin().length() < LoginPequenoException.TAM_MINIMO)
 			throw new LoginPequenoException();
+		if (!cliente.getLogin().matches("[a-zA-Z0-9]*"))
+			throw new LoginInvalidoException();
 		if (cliente.getNome() == null || cliente.getNome().length() == 0)
 			throw new NomeVazioException();
 		if (cliente.tamSenha() < SenhaPequenaException.TAM_MINIMO)

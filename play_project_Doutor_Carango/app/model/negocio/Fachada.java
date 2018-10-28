@@ -3,6 +3,7 @@ package model.negocio;
 import java.util.Map;
 
 import model.entidade.Cliente;
+import model.excecoes.LoginInvalidoException;
 import model.excecoes.LoginJaExisteException;
 import model.excecoes.LoginPequenoException;
 import model.excecoes.NomeVazioException;
@@ -41,8 +42,8 @@ public class Fachada {
 		return this.clientes.listar();
 	}
 
-	public void cadastrarCliente(Cliente cliente) throws LoginPequenoException, NomeVazioException,
-			SenhaPequenaException, LoginJaExisteException {
+	public void cadastrarCliente(Cliente cliente) throws LoginPequenoException, LoginInvalidoException,
+			NomeVazioException, SenhaPequenaException, LoginJaExisteException {
 		this.clientes.cadastrar(cliente);
 	}
 
