@@ -6,8 +6,10 @@ import model.entidade.Cliente;
 import model.excecoes.LoginInvalidoException;
 import model.excecoes.LoginJaExisteException;
 import model.excecoes.LoginPequenoException;
+import model.excecoes.NomeInvalidoException;
 import model.excecoes.NomeVazioException;
 import model.excecoes.SenhaIncorretaException;
+import model.excecoes.SenhaInvalidaException;
 import model.excecoes.SenhaPequenaException;
 import model.negocio.NegocioClientes;
 
@@ -43,7 +45,8 @@ public class Fachada {
 	}
 
 	public void cadastrarCliente(Cliente cliente) throws LoginPequenoException, LoginInvalidoException,
-			NomeVazioException, SenhaPequenaException, LoginJaExisteException {
+			NomeVazioException, NomeInvalidoException, SenhaPequenaException, SenhaInvalidaException,
+			LoginJaExisteException {
 		this.clientes.cadastrar(cliente);
 	}
 

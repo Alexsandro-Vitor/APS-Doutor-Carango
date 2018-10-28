@@ -5,20 +5,20 @@ import java.util.Map;
 public class Cliente {
 	private String nome;
 	private String login;
-	private String senha;
+	private Senha senha;
 
 	public Cliente() {}
 
 	/**
-	 * Construtor por atributos, usado para a inicialização inicial
-	 * @param nome - O nome do Cliente
-	 * @param login - O login do Cliente
-	 * @param senha - A senha do Cliente
+	 * Construtor por atributos, usado para a inicialização inicial.
+	 * @param nome - O nome do Cliente.
+	 * @param login - O login do Cliente.
+	 * @param senha - A senha do Cliente.
 	 */
 	public Cliente(String nome, String login, String senha) {
 		this.nome = nome;
 		this.login = login;
-		this.senha = senha;
+		this.senha = new Senha(senha);
 	}
 
 	/**
@@ -28,7 +28,7 @@ public class Cliente {
 	public Cliente(Map<String, String> map) {
 		this.nome = map.get("Nome");
 		this.login = map.get("Login");
-		this.senha = map.get("Senha");
+		this.senha = new Senha(map.get("Senha"));
 	}
 
 	/**
@@ -56,12 +56,12 @@ public class Cliente {
 	}
 
 	/**
-	 * Checa se a senha está certa. É feito desse jeito porque acho que um getter seria uma brecha de segurança.
+	 * Checa se a senha está certa.
 	 * @param senha - A senha a ser checada.
 	 * @return Se as senhas são iguais.
 	 */
 	public boolean checkSenha(String senha) {
-		return this.senha.equals(senha);
+		return this.senha.check(senha);
 	}
 
 	/**
@@ -69,9 +69,16 @@ public class Cliente {
 	 * @return O tamanho da senha. Caso a senha seja null, retorna 0.
 	 */
 	public int tamSenha() {
-		if (this.senha == null)
-			return 0;
-		return this.senha.length();
+		return this.senha.tamanho();
+	}
+
+	/**
+	 * Valida a senha com uma expressão regular.
+	 * @param regex - A expressão regular para validar a senha.
+	 * @return Se a senha é válida.
+	 */
+	public boolean validarSenha(String regex) {
+		return this.senha.validar(regex);
 	}
 
 	/**
@@ -79,6 +86,6 @@ public class Cliente {
 	 * @param senha - A nova senha.
 	 */
 	public void setSenha(String senha) {
-		if (senha != null) this.senha = senha;
+		this.senha = new Senha(senha);
 	}
 }
