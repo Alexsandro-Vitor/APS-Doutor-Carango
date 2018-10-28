@@ -10,7 +10,7 @@
 		@helper.form(action = helper.CSRF(routes.ClientesController.editarCliente(cliente.getLogin()))){
 			<p>
 				<label for="senha_atual"><b>Senha Atual:</b></label>
-				<input type="text" id="senha_atual" name="Senha Atual">
+				<input type="password" id="senha_atual" name="Senha Atual">
 			</p>
 			A senha atual é necessária para alterar os dados do Cliente
 			<p>
@@ -19,7 +19,7 @@
 			</p>
 			<p>
 				<label for="nova_senha"><b>Nova Senha:</b></label>
-				<input type="text" id="nova_senha" name="Nova Senha">
+				<input type="password" id="nova_senha" name="Nova Senha">
 			</p>
 
 			<input type="submit" value="Salvar alterações">
