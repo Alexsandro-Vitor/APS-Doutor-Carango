@@ -86,6 +86,6 @@ public class Cliente {
 	 * @param senha - A nova senha.
 	 */
 	public void setSenha(String senha) {
-		this.senha = new Senha(senha);
+		if (senha != null) this.senha = new Senha(senha);
 	}
 }

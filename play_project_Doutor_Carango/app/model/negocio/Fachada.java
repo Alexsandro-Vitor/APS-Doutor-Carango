@@ -54,8 +54,8 @@ public class Fachada {
 		return this.clientes.buscar(login);
 	}
 
-	public void editarCliente(String login, Map<String, String> map)
-			throws SenhaIncorretaException, SenhaPequenaException {
+	public void editarCliente(String login, Map<String, String> map) throws NomeInvalidoException,
+			NomeVazioException, SenhaIncorretaException, SenhaPequenaException, SenhaInvalidaException {
 		this.clientes.editar(login, map);
 	}
 

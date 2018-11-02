@@ -28,21 +28,10 @@ public class NegocioClientes {
 	public void cadastrar(Cliente cliente) throws LoginPequenoException, LoginInvalidoException,
 			NomeVazioException, NomeInvalidoException, SenhaPequenaException, SenhaInvalidaException,
 			LoginJaExisteException {
-		if (cliente.getLogin() == null || cliente.getLogin().length() < LoginPequenoException.TAM_MINIMO)
-			throw new LoginPequenoException();
-		if (!cliente.getLogin().matches(LoginInvalidoException.REGEX_LOGIN))
-			throw new LoginInvalidoException();
-		if (cliente.getNome() == null || cliente.getNome().length() == 0)
-			throw new NomeVazioException();
-		if (!cliente.getNome().matches(NomeInvalidoException.REGEX_NOME))
-			throw new NomeInvalidoException();
-		if (cliente.tamSenha() < SenhaPequenaException.TAM_MINIMO)
-			throw new SenhaPequenaException();
-		if (!cliente.validarSenha(SenhaInvalidaException.REGEX_SENHA))
-			throw new SenhaInvalidaException();
-		if (this.cadastro.buscar(cliente.getLogin()) != null)
-			throw new LoginJaExisteException();
-		
+		validarLogin(cliente.getLogin());
+		validarNome(cliente.getNome());
+		validarSenhaCliente(cliente);
+
 		this.cadastro.cadastrar(cliente);
 	}
 
@@ -50,14 +39,16 @@ public class NegocioClientes {
 		return this.cadastro.buscar(login);
 	}
 
-	public void editar(String login, Map<String, String> map)
-			throws SenhaIncorretaException, SenhaPequenaException {
+	public void editar(String login, Map<String, String> map) throws NomeInvalidoException,
+			NomeVazioException, SenhaIncorretaException, SenhaPequenaException, SenhaInvalidaException {
 		Cliente cliente = this.cadastro.buscar(login);
 		if (!cliente.checkSenha(map.get("Senha Atual")))
 			throw new SenhaIncorretaException();
+
+		String nome = map.get("Nome");
+		if (nome != null) validarNome(nome);
 		String senha = map.get("Nova Senha");
-		if (senha == null || senha.length() < SenhaPequenaException.TAM_MINIMO)
-			throw new SenhaPequenaException();
+		if (senha != null) validarSenha(senha);
 
 		cliente.setNome(map.get("Nome"));
 		cliente.setSenha(senha);
@@ -67,5 +58,36 @@ public class NegocioClientes {
 		boolean saida = this.cadastro.buscar(login) != null;
 		this.cadastro.remover(login);
 		return saida;
+	}
+
+	private void validarLogin(String login) throws LoginPequenoException,
+			LoginInvalidoException, LoginJaExisteException {
+		if (login == null || login.length() < LoginPequenoException.TAM_MINIMO)
+			throw new LoginPequenoException();
+		if (!login.matches(LoginInvalidoException.REGEX_LOGIN))
+			throw new LoginInvalidoException();
+		if (this.cadastro.buscar(login) != null)
+			throw new LoginJaExisteException();
+	}
+
+	private void validarNome(String nome) throws NomeVazioException, NomeInvalidoException {
+		if (nome == null || nome.length() == 0)
+			throw new NomeVazioException();
+		if (!nome.matches(NomeInvalidoException.REGEX_NOME))
+			throw new NomeInvalidoException();
+	}
+
+	private void validarSenha(String senha) throws SenhaPequenaException, SenhaInvalidaException {
+		if (senha.length() < SenhaPequenaException.TAM_MINIMO)
+			throw new SenhaPequenaException();
+		if (!senha.matches(SenhaInvalidaException.REGEX_SENHA))
+			throw new SenhaInvalidaException();
+	}
+
+	private void validarSenhaCliente(Cliente cliente) throws SenhaPequenaException, SenhaInvalidaException {
+		if (cliente.tamSenha() < SenhaPequenaException.TAM_MINIMO)
+			throw new SenhaPequenaException();
+		if (!cliente.validarSenha(SenhaInvalidaException.REGEX_SENHA))
+			throw new SenhaInvalidaException();
 	}
 }
