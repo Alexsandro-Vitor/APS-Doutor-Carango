@@ -16,7 +16,10 @@ GET		/clientes/remocao/:login/	controllers.ClientesController.remocaoCliente(log
 # Oficinas
 GET		/oficinas/					controllers.OficinasController.index
 GET		/oficinas/adicao/			controllers.OficinasController.adicaoOficina
+POST	/oficinas/adicao/			controllers.OficinasController.adicionarOficina
 GET		/oficinas/info/:nome/		controllers.OficinasController.infoOficina(nome: String)
+GET		/oficinas/info/:nome/edit/	controllers.OficinasController.edicaoOficina(nome: String)
+POST	/oficinas/info/:nome/edit/	controllers.OficinasController.editarOficina(nome: String)
 GET		/oficinas/remocao/:nome/	controllers.OficinasController.remocaoOficina(nome: String)
 
 # Map static resources from the /public folder to the /assets URL path

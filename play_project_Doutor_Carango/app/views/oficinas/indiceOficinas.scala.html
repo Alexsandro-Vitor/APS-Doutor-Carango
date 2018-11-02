@@ -6,11 +6,12 @@
 	</head>
 	<body>
 		<h1>Oficinas</h1>
-		<p><a href="oficinas/adicao/">Adicionar Oficina</a></p>
+		<p><a href="/oficinas/adicao/">Adicionar Oficina</a></p>
 		<ul>
 		@for(oficina <- oficinas) {
 			<li><b>@oficina.getNome()</b><br>
 			<a href="/oficinas/info/@oficina.getNome()/">Info</a> |
+			<a href="/oficinas/info/@oficina.getNome()/edit/">Editar</a> |
 			<a href="/oficinas/remocao/@oficina.getNome()/">Remover</a></li>
 		}
 		</ul>

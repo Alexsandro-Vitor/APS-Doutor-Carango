@@ -28,8 +28,8 @@ public class Fachada {
 			this.clientes.cadastrar(new Cliente("Rodolfo Jose de Souza Rocha", "rjsr", "1234"));
 			this.clientes.cadastrar(new Cliente("Orlando Verdasca Aceto", "ova", "1234"));
 			oficinas = new NegocioOficinas();
-			this.oficinas.cadastrar(new Oficina("Optimus", "Cybertron", 0));
-			this.oficinas.cadastrar(new Oficina("Oficina", "Endereço", 0));
+			this.oficinas.cadastrar(new Oficina("Optimus", "Cybertron"));
+			this.oficinas.cadastrar(new Oficina("Oficina", "Endereço"));
 		} catch (Exception e) {}
 	}
 

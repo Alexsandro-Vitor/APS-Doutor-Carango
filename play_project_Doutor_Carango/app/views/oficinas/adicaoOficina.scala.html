@@ -1,0 +1,23 @@
+@(oficinaForm : Form[model.entidade.Oficina])
+@import helper._
+
+<html>
+	<head>
+		<title>Cadatrar Oficina - Doutor Carango</title>
+	</head>
+	<body>
+		<h1>Cadastro de Oficina</h1>
+		@helper.form(action = helper.CSRF(routes.OficinasController.adicionarOficina())){
+			<p>
+				<label for="nome"><b>Nome:</b></label>
+				<input type="text" id="nome" name="Nome">
+			</p>
+			<p>
+				<label for="endereco"><b>Endereço:</b></label>
+				<input type="text" id="endereco" name="Endereco">
+			</p>
+			<input type="submit" value="Cadastrar">
+		}
+		<p><a href="/oficinas/">Voltar para a lista de Oficinas</a></p>
+	</body>
+</html>

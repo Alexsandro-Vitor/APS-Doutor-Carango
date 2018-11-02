@@ -6,9 +6,11 @@ import model.colecaoEntidade.CadastroOficinas;
 
 public class NegocioOficinas {
 	private IRepositorioOficinas cadastro;
+	private int proxId;
 
 	public NegocioOficinas() {
 		cadastro = new CadastroOficinas();
+		proxId = 0;
 	}
 
 	public Oficina[] listar() {
@@ -16,6 +18,8 @@ public class NegocioOficinas {
 	}
 
 	public void cadastrar(Oficina oficina) {
+		oficina.setId(this.proxId);
+		this.proxId++;
 		this.cadastro.cadastrar(oficina);
 	}
 

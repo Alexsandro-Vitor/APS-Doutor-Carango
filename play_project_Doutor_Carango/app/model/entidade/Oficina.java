@@ -1,14 +1,22 @@
 package model.entidade;
 
+import java.util.Map;
+
 public class Oficina {
 	private String nome;
 	private String endereco;
 	private int id;
 
-	public Oficina(String nome, String endereco, int id) {
+	public Oficina() {}
+
+	public Oficina(String nome, String endereco) {
 		this.nome = nome;
 		this.endereco = endereco;
-		this.id = id;
+	}
+
+	public Oficina(Map<String, String> map) {
+		this.nome = map.get("Nome");
+		this.endereco = map.get("Endereco");
 	}
 
 	public String getNome() {
@@ -23,7 +31,11 @@ public class Oficina {
 		this.endereco = endereco;
 	}
 
-	public double getId() {
+	public int getId() {
 		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }
