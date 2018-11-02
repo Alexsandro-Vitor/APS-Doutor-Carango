@@ -41,20 +41,24 @@ public class NegocioClientes {
 	}
 
 	public void editar(String login, Map<String, String> map) throws NomeInvalidoException,
-			NomeVazioException, SenhaIncorretaException, SenhaPequenaException, SenhaInvalidaException,
-			LoginPequenoException, LoginInvalidoException {
+			NomeVazioException, SenhaIncorretaException, SenhaPequenaException,
+			SenhaInvalidaException, LoginPequenoException, LoginInvalidoException {
 		validarLogin(login);
 		Cliente cliente = this.cadastro.buscar(login);
 		if (!cliente.checkSenha(map.get("Senha Atual")))
 			throw new SenhaIncorretaException();
 
 		String nome = map.get("Nome");
-		if (nome != null) validarNome(nome);
+		if (!nullOrEmpty(nome)) validarNome(nome);
 		String senha = map.get("Nova Senha");
-		if (senha != null) validarSenha(senha);
+		if (!nullOrEmpty(senha)) validarSenha(senha);
 
-		cliente.setNome(map.get("Nome"));
-		cliente.setSenha(senha);
+		if (!nullOrEmpty(nome)) cliente.setNome(nome);
+		if (!nullOrEmpty(senha)) cliente.setSenha(senha);
+	}
+
+	private boolean nullOrEmpty(String s) {
+		return s == null || s.isEmpty();
 	}
 
 	public boolean remover(String login) throws LoginPequenoException, LoginInvalidoException {
@@ -80,7 +84,7 @@ public class NegocioClientes {
 	}
 
 	private void validarNome(String nome) throws NomeVazioException, NomeInvalidoException {
-		if (nome == null || nome.length() == 0)
+		if (nullOrEmpty(nome))
 			throw new NomeVazioException();
 		if (!nome.matches(NomeInvalidoException.REGEX_NOME))
 			throw new NomeInvalidoException();
