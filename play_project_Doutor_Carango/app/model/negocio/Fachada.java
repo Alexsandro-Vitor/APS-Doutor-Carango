@@ -50,12 +50,13 @@ public class Fachada {
 		this.clientes.cadastrar(cliente);
 	}
 
-	public Cliente buscarCliente(String login) {
+	public Cliente buscarCliente(String login) throws LoginPequenoException, LoginInvalidoException {
 		return this.clientes.buscar(login);
 	}
 
 	public void editarCliente(String login, Map<String, String> map) throws NomeInvalidoException,
-			NomeVazioException, SenhaIncorretaException, SenhaPequenaException, SenhaInvalidaException {
+			NomeVazioException, SenhaIncorretaException, SenhaPequenaException, SenhaInvalidaException,
+			LoginPequenoException, LoginInvalidoException {
 		this.clientes.editar(login, map);
 	}
 

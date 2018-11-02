@@ -59,17 +59,27 @@ public class ClientesController extends Controller {
 	}
 	
 	public Result infoCliente(String login) {
-		Cliente cliente = fachada.buscarCliente(login);
-		if (cliente == null)
-			return notFound(clienteNaoExiste.render(login));
-		return ok(infoCliente.render(cliente));
+		try {
+			Cliente cliente = fachada.buscarCliente(login);
+			if (cliente == null)
+				return notFound(clienteNaoExiste.render(login));
+			return ok(infoCliente.render(cliente));
+		} catch (Exception e) {
+			return badRequest(ErroOperacaoFalhou.render(
+				e.getMessage(), null, "/clientes/", "Voltar para a lista de Clientes"));
+		}
 	}
 
 	public Result edicaoCliente(String login) {
-		Cliente cliente = fachada.buscarCliente(login);
-		if (cliente == null)
-			return notFound(clienteNaoExiste.render(login));
-		return ok(edicaoCliente.render(formFactory.form(Cliente.class), cliente));
+		try {
+			Cliente cliente = fachada.buscarCliente(login);
+			if (cliente == null)
+				return notFound(clienteNaoExiste.render(login));
+			return ok(edicaoCliente.render(formFactory.form(Cliente.class), cliente));
+		} catch (Exception e) {
+			return badRequest(ErroOperacaoFalhou.render(
+				e.getMessage(), null, "/clientes/", "Voltar para a lista de Clientes"));
+		}
 	}
 
 	public Result editarCliente(String login) {
