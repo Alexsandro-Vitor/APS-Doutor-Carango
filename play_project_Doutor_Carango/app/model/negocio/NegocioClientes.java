@@ -14,6 +14,9 @@ import model.excecoes.SenhaPequenaException;
 import model.interfaces.IRepositorioClientes;
 import model.colecaoEntidade.CadastroClientes;
 
+/**
+ * Classe responsável por tratar as entradas para o repositório de Clientes.
+ */
 public class NegocioClientes {
 	private IRepositorioClientes cadastro;
 
@@ -21,10 +24,25 @@ public class NegocioClientes {
 		cadastro = new CadastroClientes();
 	}
 
+	/**
+	 * Gera um array com todos os Clientes do repositório.
+	 * @return Todos os clientes em um array.
+	 */
 	public Cliente[] listar() {
 		return this.cadastro.listar();
 	}
 
+	/**
+	 * Cadastra um Cliente novo.
+	 * @param cliente O novo Cliente.
+	 * @throws LoginPequenoException Se o login tiver menos de 3 caracteres.
+	 * @throws LoginInvalidoException Se o login conter caracteres inválidos.
+	 * @throws NomeVazioException Se o nome não for preenchido.
+	 * @throws NomeInvalidoException Se o nome conter caracteres inválidos.
+	 * @throws SenhaPequenaException Se a senha tiver menos de 4 caracteres.
+	 * @throws SenhaInvalidaException Se a senha conter caracteres inválidos.
+	 * @throws LoginJaExisteException Se já existe um Cliente com esse nome.
+	 */
 	public void cadastrar(Cliente cliente) throws LoginPequenoException, LoginInvalidoException,
 			NomeVazioException, NomeInvalidoException, SenhaPequenaException, SenhaInvalidaException,
 			LoginJaExisteException {
@@ -35,13 +53,32 @@ public class NegocioClientes {
 		this.cadastro.cadastrar(cliente);
 	}
 
+	/**
+	 * Busca um Cliente no repositório.
+	 * @param login O login do Cliente buscado.
+	 * @return O Cliente que possui aquele login, se ele não existir, retorna null.
+	 * @throws LoginPequenoException Se o login tiver menos de 3 caracteres.
+	 * @throws LoginInvalidoException Se o login conter caracteres inválidos.
+	 */
 	public Cliente buscar(String login) throws LoginPequenoException, LoginInvalidoException {
 		validarLogin(login);
 		return this.cadastro.buscar(login);
 	}
 
-	public void editar(String login, Map<String, String> map) throws NomeInvalidoException,
-			NomeVazioException, SenhaIncorretaException, SenhaPequenaException,
+	/**
+	 * Edita as informações de um Cliente.
+	 * @param login O login do Cliente a ser editado.
+	 * @param map Um Map de valores para a edição do Cliente.
+	 * @throws NomeVazioException Se o nome não for preenchido.
+	 * @throws NomeInvalidoException Se o nome conter caracteres inválidos.
+	 * @throws SenhaIncorretaException Se a senha atual estiver incorreta.
+	 * @throws SenhaPequenaException Se a nova senha tiver menos de 4 caracteres.
+	 * @throws SenhaInvalidaException Se a senha conter caracteres inválidos.
+	 * @throws LoginPequenoException Se o login tiver menos de 3 caracteres.
+	 * @throws LoginInvalidoException Se o login conter caracteres inválidos.
+	 */
+	public void editar(String login, Map<String, String> map) throws NomeVazioException, 
+			NomeInvalidoException, SenhaIncorretaException, SenhaPequenaException,
 			SenhaInvalidaException, LoginPequenoException, LoginInvalidoException {
 		validarLogin(login);
 		Cliente cliente = this.cadastro.buscar(login);
@@ -57,16 +94,28 @@ public class NegocioClientes {
 		if (!nullOrEmpty(senha)) cliente.setSenha(senha);
 	}
 
-	private boolean nullOrEmpty(String s) {
-		return s == null || s.isEmpty();
-	}
-
+	/**
+	 * Remove um Cliente do repositório.
+	 * @param login O login do Cliente a ser removido.
+	 * @return Se havia um Cliente com o login dado.
+	 * @throws LoginPequenoException Se o login tiver menos de 3 caracteres.
+	 * @throws LoginInvalidoException Se o login conter caracteres inválidos.
+	 */
 	public boolean remover(String login) throws LoginPequenoException, LoginInvalidoException {
 		validarLogin(login);
 
 		boolean saida = this.cadastro.buscar(login) != null;
 		this.cadastro.remover(login);
 		return saida;
+	}
+
+	/**
+	 * Checa se a String é nula ou vazia.
+	 * @param s A String a ser checada.
+	 * @return true se s == null ou s.length() == 0, false caso contrário.
+	 */
+	private boolean nullOrEmpty(String s) {
+		return s == null || s.isEmpty();
 	}
 
 	private void validarLogin(String login) throws LoginPequenoException, LoginInvalidoException {

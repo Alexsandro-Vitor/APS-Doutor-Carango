@@ -6,6 +6,9 @@ import java.util.HashMap;
 import model.entidade.Cliente;
 import model.interfaces.IRepositorioClientes;
 
+/**
+ * Repositório no qual os Clientes são armazenados na memória. Não é persistente.
+ */
 public class CadastroClientes implements IRepositorioClientes {
 	private Map<String, Cliente> clientes;
 
@@ -14,8 +17,8 @@ public class CadastroClientes implements IRepositorioClientes {
 	}
 
 	/**
-	 * Gera um array com todos os Clientes da base de dados
-	 * @return Todos os clientes em um array
+	 * Gera um array com todos os Clientes do repositório.
+	 * @return Todos os clientes em um array.
 	 */
 	public Cliente[] listar() {
 		Cliente[] saida = new Cliente[this.clientes.size()];
@@ -27,25 +30,25 @@ public class CadastroClientes implements IRepositorioClientes {
 	}
 
 	/**
-	 * Cadastra um Cliente novo
-	 * @param cliente O novo Cliente
+	 * Cadastra um Cliente novo.
+	 * @param cliente O novo Cliente.
 	 */
 	public void cadastrar(Cliente cliente) {
 		this.clientes.put(cliente.getLogin(), cliente);
 	}
 
 	/**
-	 * Busca um Cliente
-	 * @param login O login do Cliente buscado
-	 * @return O Cliente com o login dado
+	 * Busca um Cliente.
+	 * @param login O login do Cliente buscado.
+	 * @return O Cliente com o login dado.
 	 */
 	public Cliente buscar(String login) {
 		return this.clientes.get(login);
 	}
 
 	/**
-	 * Remove um Cliente
-	 * @param nome O login do Cliente buscado
+	 * Remove um Cliente.
+	 * @param nome O login do Cliente buscado.
 	 */
 	public void remover(String login) {
 		this.clientes.remove(login);
