@@ -57,7 +57,9 @@ public class NegocioClientes {
 		cliente.setSenha(senha);
 	}
 
-	public boolean remover(String login) {
+	public boolean remover(String login) throws LoginPequenoException, LoginInvalidoException {
+		validarLogin(login);
+
 		boolean saida = this.cadastro.buscar(login) != null;
 		this.cadastro.remover(login);
 		return saida;

@@ -60,7 +60,7 @@ public class Fachada {
 		this.clientes.editar(login, map);
 	}
 
-	public boolean removerCliente(String login) {
+	public boolean removerCliente(String login) throws LoginPequenoException, LoginInvalidoException {
 		return this.clientes.remover(login);
 	}
 

@@ -96,9 +96,15 @@ public class ClientesController extends Controller {
 	}
 	
 	public Result remocaoCliente(String login) {
+		try {
 		if (fachada.removerCliente(login))
 			return ok(remocaoClienteSucesso.render(login));
 		return notFound(clienteNaoExiste.render(login));
+		} catch (Exception e) {
+			return badRequest(ErroOperacaoFalhou.render(
+				e.getMessage(), "Não foi possível remover um cliente",
+				"/clientes/", "Voltar para a lista de Clientes"));
+		}
 	}
 
 }
