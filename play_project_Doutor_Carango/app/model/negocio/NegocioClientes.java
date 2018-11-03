@@ -82,7 +82,7 @@ public class NegocioClientes {
 			LoginPequenoException, LoginInvalidoException {
 		validarLogin(login);
 		Cliente cliente = this.cadastro.buscar(login);
-		if (!cliente.getSenha().equals(Cliente.hashing(map.get("Senha Atual"))))
+		if (!cliente.getSenha().equals(Cliente.hashing(map.get("Senha Atual"), login)))
 			throw new SenhaIncorretaException();
 
 		String nome = map.get("Nome");

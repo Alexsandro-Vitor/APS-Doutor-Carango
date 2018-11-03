@@ -1,6 +1,5 @@
 package model.entidade;
 
-import play.Logger;
 import java.security.MessageDigest;
 import java.util.Map;
 
@@ -18,7 +17,7 @@ public class Cliente {
 	public Cliente(Map<String, String> map) {
 		this.nome = map.get("Nome");
 		this.login = map.get("Login");
-		this.senha = hashing(map.get("Senha"));
+		this.senha = hashing(map.get("Senha"), this.login);
 	}
 
 	/**
@@ -58,19 +57,26 @@ public class Cliente {
 	 * @param senha - A nova senha, sem hashing.
 	 */
 	public void setSenha(String senha) {
-		this.senha = hashing(senha);
+		this.senha = hashing(senha, this.login);
 	}
 
 	/**
-	 * Aplica hashing à senha para torná-la não identificável.
+	 * Aplica hashing à senha para que ela não seja identificável.
+	 * @param senha A senha que passará pelo hashing.
+	 * @param sal Uma outra String usada para gerar hashes diferentes para a mesma senha.
+	 * @return A senha com hash.
 	 */
-	public static String hashing(String valor) {
+	public static String hashing(String senha, String sal) {
 		try {
-			MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
-			byte[] messageDigest = algorithm.digest(valor.getBytes("UTF-8"));
-			return new String(messageDigest, "UTF-8");
+			MessageDigest algorithm = MessageDigest.getInstance("SHA-512");
+			byte[] messageDigest = algorithm.digest(sal.concat(senha).getBytes("UTF-8"));
+
+			StringBuilder hexString = new StringBuilder();
+			for (byte b : messageDigest) {
+				hexString.append(String.format("%02X", 0xFF & b));
+			}
+			return hexString.toString();
 		} catch (Exception e) {
-			Logger.error(e.getMessage());
 			return null;
 		}
 	}
