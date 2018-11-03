@@ -48,25 +48,38 @@ public class OficinasController extends Controller {
 		}
 	}
 	
-	public Result infoOficina(String nome) {
-		Oficina oficina = fachada.buscarOficina(nome);
-		if (oficina == null)
-			return ok(oficinaNaoExiste.render(nome));
-		return ok(infoOficina.render(nome, oficina.getEndereco()));
+	public Result infoOficina(int id) {
+		try {
+			Oficina oficina = fachada.buscarOficina(id);
+			if (oficina == null)
+				return notFound(oficinaNaoExiste.render(id));
+			return ok(infoOficina.render(oficina));
+		} catch (Exception e) {
+			return badRequest(ErroOperacaoFalhou.render(
+				e.getMessage(), null, "/oficinas/", "Voltar para a lista de Oficinas"));
+		}
 	}
 
-	public Result edicaoOficina(String nome) {
+	public Result edicaoOficina(int id) {
+		try {
+			Oficina oficina = fachada.buscarOficina(id);
+			if (oficina == null)
+				return notFound(oficinaNaoExiste.render(id));
+			return ok(edicaoOficina.render(formFactory.form(Oficina.class), oficina));
+		} catch (Exception e) {
+			return badRequest(ErroOperacaoFalhou.render(
+				e.getMessage(), null, "/oficinas/", "Voltar para a lista de Oficinas"));
+		}
+	}
+
+	public Result editarOficina(int id) {
 		return TODO;
 	}
 
-	public Result editarOficina(String nome) {
-		return TODO;
-	}
-
-	public Result remocaoOficina(String login) {
-		if (fachada.removerOficina(login))
-			return ok(remocaoOficinaSucesso.render(login));
-		return ok(oficinaNaoExiste.render(login));
+	public Result remocaoOficina(int id) {
+		if (fachada.removerOficina(id))
+			return ok(remocaoOficinaSucesso.render(id));
+		return ok(oficinaNaoExiste.render(id));
 	}
 
 }

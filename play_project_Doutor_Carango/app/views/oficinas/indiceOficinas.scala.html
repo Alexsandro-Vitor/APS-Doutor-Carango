@@ -10,9 +10,9 @@
 		<ul>
 		@for(oficina <- oficinas) {
 			<li><b>@oficina.getNome()</b><br>
-			<a href="/oficinas/info/@oficina.getNome()/">Info</a> |
-			<a href="/oficinas/info/@oficina.getNome()/edit/">Editar</a> |
-			<a href="/oficinas/remocao/@oficina.getNome()/">Remover</a></li>
+			<a href="/oficinas/info/@oficina.getId()/">Info</a> |
+			<a href="/oficinas/info/@oficina.getId()/edit/">Editar</a> |
+			<a href="/oficinas/remocao/@oficina.getId()/">Remover</a></li>
 		}
 		</ul>
 		<p><a href="/">Voltar à página inicial</a></p>

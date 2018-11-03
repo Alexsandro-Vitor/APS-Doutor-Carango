@@ -1,12 +1,13 @@
-@(nome: String, endereco: String)
+@(oficina: model.entidade.Oficina)
 
 <html>
 	<head>
-		<title>@nome - Doutor Carango</title>
+		<title>@oficina.getNome() - Doutor Carango</title>
 	</head>
 	<body>
-		<h1>Oficina: @nome</h1>
-		<p><b>Endereço:</b> @endereco</p>
+		<h1>Oficina: @oficina.getNome()</h1>
+		<p><b>Código:</b> @oficina.getId()</p>
+		<p><b>Endereço:</b> @oficina.getEndereco()</p>
 		<p><a href="/oficinas/">Voltar para a lista de Oficinas</a></p>
 	</body>
 </html>

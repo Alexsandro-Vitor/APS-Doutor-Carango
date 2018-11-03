@@ -1,0 +1,25 @@
+@(oficinaForm : Form[model.entidade.Oficina], oficina : model.entidade.Oficina)
+@import helper._
+
+<html>
+	<head>
+		<title>Editar Oficina - Doutor Carango</title>
+	</head>
+	<body>
+		<h1>Editando Oficina @oficina.getNome()</h1>
+		@helper.form(action = helper.CSRF(routes.OficinasController.editarOficina(oficina.getId()))){
+			<p>
+				<label for="nome"><b>Nome:</b></label>
+				<input type="text" id="nome" name="Nome" placeholder="@oficina.getNome()" size="50">
+			</p>
+			<p>
+				<label for="endereco"><b>Endereço:</b></label>
+				<input type="text" id="endereco" name="Endereco"
+					placeholder="@oficina.getEndereco()" size="50">
+			</p>
+
+			<input type="submit" value="Salvar alterações">
+		}
+		<p><a href="/oficinas/">Voltar para a lista de Oficinas</a></p>
+	</body>
+</html>

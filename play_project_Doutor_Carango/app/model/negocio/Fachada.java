@@ -72,11 +72,11 @@ public class Fachada {
 		this.oficinas.cadastrar(oficina);
 	}
 
-	public Oficina buscarOficina(String nome) {
-		return this.oficinas.buscar(nome);
+	public Oficina buscarOficina(int id) {
+		return this.oficinas.buscar(id);
 	}
 
-	public boolean removerOficina(String nome) {
-		return this.oficinas.remover(nome);
+	public boolean removerOficina(int id) {
+		return this.oficinas.remover(id);
 	}
 }

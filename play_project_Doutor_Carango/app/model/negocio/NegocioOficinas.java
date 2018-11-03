@@ -23,13 +23,13 @@ public class NegocioOficinas {
 		this.cadastro.cadastrar(oficina);
 	}
 
-	public Oficina buscar(String nome) {
-		return this.cadastro.buscar(nome);
+	public Oficina buscar(int id) {
+		return this.cadastro.buscar(id);
 	}
 
-	public boolean remover(String nome) {
-		boolean saida = this.cadastro.buscar(nome) != null;
-		this.cadastro.remover(nome);
+	public boolean remover(int id) {
+		boolean saida = this.cadastro.buscar(id) != null;
+		this.cadastro.remover(id);
 		return saida;
 	}
 }

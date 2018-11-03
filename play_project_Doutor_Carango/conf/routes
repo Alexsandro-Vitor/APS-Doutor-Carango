@@ -17,10 +17,10 @@ GET		/clientes/remocao/:login/	controllers.ClientesController.remocaoCliente(log
 GET		/oficinas/					controllers.OficinasController.index
 GET		/oficinas/adicao/			controllers.OficinasController.adicaoOficina
 POST	/oficinas/adicao/			controllers.OficinasController.adicionarOficina
-GET		/oficinas/info/:nome/		controllers.OficinasController.infoOficina(nome: String)
-GET		/oficinas/info/:nome/edit/	controllers.OficinasController.edicaoOficina(nome: String)
-POST	/oficinas/info/:nome/edit/	controllers.OficinasController.editarOficina(nome: String)
-GET		/oficinas/remocao/:nome/	controllers.OficinasController.remocaoOficina(nome: String)
+GET		/oficinas/info/:id/			controllers.OficinasController.infoOficina(id: Integer)
+GET		/oficinas/info/:id/edit/	controllers.OficinasController.edicaoOficina(id: Integer)
+POST	/oficinas/info/:id/edit/	controllers.OficinasController.editarOficina(id: Integer)
+GET		/oficinas/remocao/:id/	controllers.OficinasController.remocaoOficina(id: Integer)
 
 # Map static resources from the /public folder to the /assets URL path
 GET		/assets/*file				controllers.Assets.versioned(path="/public", file: Asset)

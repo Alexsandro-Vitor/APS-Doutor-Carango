@@ -7,16 +7,16 @@ import model.entidade.Oficina;
 import model.interfaces.IRepositorioOficinas;
 
 public class CadastroOficinas implements IRepositorioOficinas {
-	private Map<String, Oficina> oficinas;
+	private Map<Integer, Oficina> oficinas;
 
 	public CadastroOficinas() {
-		this.oficinas = new HashMap<String, Oficina>();
+		this.oficinas = new HashMap<Integer, Oficina>();
 	}
 	
 	public Oficina[] listar() {
 		Oficina[] saida = new Oficina[this.oficinas.size()];
 		int i = 0;
-		for (String key : this.oficinas.keySet()) {
+		for (Integer key : this.oficinas.keySet()) {
 			saida[i++] = this.oficinas.get(key);
 		}
 		return saida;
@@ -27,24 +27,15 @@ public class CadastroOficinas implements IRepositorioOficinas {
 	 * @param Oficina A nova Oficina
 	 */
 	public void cadastrar(Oficina oficina) {
-		this.oficinas.put(oficina.getNome(), oficina);
+		this.oficinas.put(oficina.getId(), oficina);
 	}
 
-	/**
-	 * Busca uma Oficina
-	 * @param login O nome da Oficina buscada
-	 * @return A Oficina com o nome dado
-	 */
-	public Oficina buscar(String nome) {
-		return this.oficinas.get(nome);
+	public Oficina buscar(int id) {
+		return this.oficinas.get(id);
 	}
 
-	/**
-	 * Remove uma Oficina
-	 * @param nome O login da Oficina buscada
-	 */
-	public void remover(String nome) {
-		this.oficinas.remove(nome);
+	public void remover(int id) {
+		this.oficinas.remove(id);
 	}
 
 	/**
