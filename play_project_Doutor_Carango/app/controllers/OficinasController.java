@@ -30,7 +30,7 @@ public class OficinasController extends Controller {
 		Oficina[] oficinas = this.fachada.listarOficinas();
 		return ok(indiceOficinas.render(oficinas));
 	}
-	
+
 	public Result adicaoOficina() {
 		return ok(adicaoOficina.render(formFactory.form(Oficina.class)));
 	}
@@ -47,7 +47,7 @@ public class OficinasController extends Controller {
 				"/oficinas/adicao/", "Voltar à tela de Adicionar Oficinas"));
 		}
 	}
-	
+
 	public Result infoOficina(int id) {
 		try {
 			Oficina oficina = fachada.buscarOficina(id);
@@ -61,15 +61,10 @@ public class OficinasController extends Controller {
 	}
 
 	public Result edicaoOficina(int id) {
-		try {
-			Oficina oficina = fachada.buscarOficina(id);
-			if (oficina == null)
-				return notFound(oficinaNaoExiste.render(id));
-			return ok(edicaoOficina.render(formFactory.form(Oficina.class), oficina));
-		} catch (Exception e) {
-			return badRequest(ErroOperacaoFalhou.render(
-				e.getMessage(), null, "/oficinas/", "Voltar para a lista de Oficinas"));
-		}
+		Oficina oficina = fachada.buscarOficina(id);
+		if (oficina == null)
+			return notFound(oficinaNaoExiste.render(id));
+		return ok(edicaoOficina.render(formFactory.form(Oficina.class), oficina));
 	}
 
 	public Result editarOficina(int id) {
@@ -81,5 +76,4 @@ public class OficinasController extends Controller {
 			return ok(remocaoOficinaSucesso.render(id));
 		return ok(oficinaNaoExiste.render(id));
 	}
-
 }

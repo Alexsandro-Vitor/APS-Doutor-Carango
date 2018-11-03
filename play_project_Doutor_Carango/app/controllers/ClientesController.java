@@ -47,9 +47,8 @@ public class ClientesController extends Controller {
 	 */
 	public Result adicionarCliente() {
 		Form<Cliente> form = formFactory.form(Cliente.class).bindFromRequest();
-		Cliente cliente = new Cliente(form.rawData());
 		try {
-			this.fachada.cadastrarCliente(cliente);
+			Cliente cliente = this.fachada.cadastrarCliente(form.rawData());
 			return created(adicaoClienteSucesso.render(cliente.getLogin()));
 		} catch (Exception e) {
 			return badRequest(ErroOperacaoFalhou.render(
@@ -97,9 +96,9 @@ public class ClientesController extends Controller {
 	
 	public Result remocaoCliente(String login) {
 		try {
-		if (fachada.removerCliente(login))
-			return ok(remocaoClienteSucesso.render(login));
-		return notFound(clienteNaoExiste.render(login));
+			if (fachada.removerCliente(login))
+				return ok(remocaoClienteSucesso.render(login));
+			return notFound(clienteNaoExiste.render(login));
 		} catch (Exception e) {
 			return badRequest(ErroOperacaoFalhou.render(
 				e.getMessage(), "Não foi possível remover um cliente",

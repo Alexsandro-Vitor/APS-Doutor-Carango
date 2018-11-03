@@ -1,25 +1,15 @@
 package model.entidade;
 
+import play.Logger;
+import java.security.MessageDigest;
 import java.util.Map;
 
 public class Cliente {
 	private String nome;
 	private String login;
-	private Senha senha;
+	private String senha;
 
 	public Cliente() {}
-
-	/**
-	 * Construtor por atributos, usado para a inicialização inicial.
-	 * @param nome - O nome do Cliente.
-	 * @param login - O login do Cliente.
-	 * @param senha - A senha do Cliente.
-	 */
-	public Cliente(String nome, String login, String senha) {
-		this.nome = nome;
-		this.login = login;
-		this.senha = new Senha(senha);
-	}
 
 	/**
 	 * Construtor por Map de Strings.
@@ -28,7 +18,7 @@ public class Cliente {
 	public Cliente(Map<String, String> map) {
 		this.nome = map.get("Nome");
 		this.login = map.get("Login");
-		this.senha = new Senha(map.get("Senha"));
+		this.senha = hashing(map.get("Senha"));
 	}
 
 	/**
@@ -56,36 +46,32 @@ public class Cliente {
 	}
 
 	/**
-	 * Checa se a senha está certa.
-	 * @param senha - A senha a ser checada.
-	 * @return Se as senhas são iguais.
+	 * Getter de senha.
+	 * @return A senha (com hash) do Cliente.
 	 */
-	public boolean checkSenha(String senha) {
-		return this.senha.check(senha);
-	}
-
-	/**
-	 * Retorna o tamanho da senha.
-	 * @return O tamanho da senha. Caso a senha seja null, retorna 0.
-	 */
-	public int tamSenha() {
-		return this.senha.tamanho();
-	}
-
-	/**
-	 * Valida a senha com uma expressão regular.
-	 * @param regex - A expressão regular para validar a senha.
-	 * @return Se a senha é válida.
-	 */
-	public boolean validarSenha(String regex) {
-		return this.senha.validar(regex);
+	public String getSenha() {
+		return this.senha;
 	}
 
 	/**
 	 * Setter de senha.
-	 * @param senha - A nova senha.
+	 * @param senha - A nova senha, sem hashing.
 	 */
 	public void setSenha(String senha) {
-		if (senha != null) this.senha = new Senha(senha);
+		this.senha = hashing(senha);
+	}
+
+	/**
+	 * Aplica hashing à senha para torná-la não identificável.
+	 */
+	public static String hashing(String valor) {
+		try {
+			MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
+			byte[] messageDigest = algorithm.digest(valor.getBytes("UTF-8"));
+			return new String(messageDigest, "UTF-8");
+		} catch (Exception e) {
+			Logger.error(e.getMessage());
+			return null;
+		}
 	}
 }

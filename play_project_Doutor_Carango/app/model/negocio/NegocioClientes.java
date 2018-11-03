@@ -9,7 +9,6 @@ import model.excecoes.NomeInvalidoException;
 import model.excecoes.LoginInvalidoException;
 import model.excecoes.NomeVazioException;
 import model.excecoes.SenhaIncorretaException;
-import model.excecoes.SenhaInvalidaException;
 import model.excecoes.SenhaPequenaException;
 import model.interfaces.IRepositorioClientes;
 import model.colecaoEntidade.CadastroClientes;
@@ -34,23 +33,25 @@ public class NegocioClientes {
 
 	/**
 	 * Cadastra um Cliente novo.
-	 * @param cliente O novo Cliente.
+	 * @param cliente Os dados do novo Cliente.
 	 * @throws LoginPequenoException Se o login tiver menos de 3 caracteres.
 	 * @throws LoginInvalidoException Se o login conter caracteres inválidos.
 	 * @throws NomeVazioException Se o nome não for preenchido.
 	 * @throws NomeInvalidoException Se o nome conter caracteres inválidos.
 	 * @throws SenhaPequenaException Se a senha tiver menos de 4 caracteres.
-	 * @throws SenhaInvalidaException Se a senha conter caracteres inválidos.
 	 * @throws LoginJaExisteException Se já existe um Cliente com esse nome.
+	 * @return O novo Cliente.
 	 */
-	public void cadastrar(Cliente cliente) throws LoginPequenoException, LoginInvalidoException,
-			NomeVazioException, NomeInvalidoException, SenhaPequenaException, SenhaInvalidaException,
-			LoginJaExisteException {
-		validarLoginAdicao(cliente.getLogin());
-		validarNome(cliente.getNome());
-		validarSenhaCliente(cliente);
+	public Cliente cadastrar(Map<String, String> cliente) throws LoginPequenoException,
+			LoginInvalidoException, NomeVazioException, NomeInvalidoException,
+			SenhaPequenaException, LoginJaExisteException {
+		validarLoginAdicao(cliente.get("Login"));
+		validarNome(cliente.get("Nome"));
+		validarSenha(cliente.get("Senha"));
 
-		this.cadastro.cadastrar(cliente);
+		Cliente saida = new Cliente(cliente);
+		this.cadastro.cadastrar(saida);
+		return saida;
 	}
 
 	/**
@@ -73,16 +74,15 @@ public class NegocioClientes {
 	 * @throws NomeInvalidoException Se o nome conter caracteres inválidos.
 	 * @throws SenhaIncorretaException Se a senha atual estiver incorreta.
 	 * @throws SenhaPequenaException Se a nova senha tiver menos de 4 caracteres.
-	 * @throws SenhaInvalidaException Se a senha conter caracteres inválidos.
 	 * @throws LoginPequenoException Se o login tiver menos de 3 caracteres.
 	 * @throws LoginInvalidoException Se o login conter caracteres inválidos.
 	 */
 	public void editar(String login, Map<String, String> map) throws NomeVazioException, 
 			NomeInvalidoException, SenhaIncorretaException, SenhaPequenaException,
-			SenhaInvalidaException, LoginPequenoException, LoginInvalidoException {
+			LoginPequenoException, LoginInvalidoException {
 		validarLogin(login);
 		Cliente cliente = this.cadastro.buscar(login);
-		if (!cliente.checkSenha(map.get("Senha Atual")))
+		if (!cliente.getSenha().equals(Cliente.hashing(map.get("Senha Atual"))))
 			throw new SenhaIncorretaException();
 
 		String nome = map.get("Nome");
@@ -139,17 +139,8 @@ public class NegocioClientes {
 			throw new NomeInvalidoException();
 	}
 
-	private void validarSenha(String senha) throws SenhaPequenaException, SenhaInvalidaException {
+	private void validarSenha(String senha) throws SenhaPequenaException {
 		if (senha.length() < SenhaPequenaException.TAM_MINIMO)
 			throw new SenhaPequenaException();
-		if (!senha.matches(SenhaInvalidaException.REGEX_SENHA))
-			throw new SenhaInvalidaException();
-	}
-
-	private void validarSenhaCliente(Cliente cliente) throws SenhaPequenaException, SenhaInvalidaException {
-		if (cliente.tamSenha() < SenhaPequenaException.TAM_MINIMO)
-			throw new SenhaPequenaException();
-		if (!cliente.validarSenha(SenhaInvalidaException.REGEX_SENHA))
-			throw new SenhaInvalidaException();
 	}
 }

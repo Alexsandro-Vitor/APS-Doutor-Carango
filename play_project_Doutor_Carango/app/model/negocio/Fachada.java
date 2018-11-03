@@ -1,5 +1,6 @@
 package model.negocio;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import model.entidade.Cliente;
@@ -9,7 +10,6 @@ import model.excecoes.LoginPequenoException;
 import model.excecoes.NomeInvalidoException;
 import model.excecoes.NomeVazioException;
 import model.excecoes.SenhaIncorretaException;
-import model.excecoes.SenhaInvalidaException;
 import model.excecoes.SenhaPequenaException;
 import model.negocio.NegocioClientes;
 
@@ -23,14 +23,26 @@ public class Fachada {
 	public Fachada() {
 		clientes = new NegocioClientes();
 		try {
-			this.clientes.cadastrar(new Cliente("Alexsandro Vítor Serafim de Carvalho", "avsc", "1234"));
-			this.clientes.cadastrar(new Cliente("Raquel Maria Santos de Oliveira", "rmso", "1234"));
-			this.clientes.cadastrar(new Cliente("Rodolfo Jose de Souza Rocha", "rjsr", "1234"));
-			this.clientes.cadastrar(new Cliente("Orlando Verdasca Aceto", "ova", "1234"));
+			this.clientes.cadastrar(
+				clienteInicial("Alexsandro Vítor Serafim de Carvalho", "avsc", "1234"));
+			this.clientes.cadastrar(
+				clienteInicial("Raquel Maria Santos de Oliveira", "rmso", "1234"));
+			this.clientes.cadastrar(
+				clienteInicial("Rodolfo Jose de Souza Rocha", "rjsr", "1234"));
+			this.clientes.cadastrar(
+				clienteInicial("Orlando Verdasca Aceto", "ova", "1234"));
 			oficinas = new NegocioOficinas();
 			this.oficinas.cadastrar(new Oficina("Optimus", "Cybertron"));
 			this.oficinas.cadastrar(new Oficina("Oficina", "Endereço"));
 		} catch (Exception e) {}
+	}
+
+	private Map<String, String> clienteInicial(String nome, String login, String senha) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("Nome", nome);
+		map.put("Login", login);
+		map.put("Senha", senha);
+		return map;
 	}
 
 	private static Fachada instance;
@@ -44,10 +56,10 @@ public class Fachada {
 		return this.clientes.listar();
 	}
 
-	public void cadastrarCliente(Cliente cliente) throws LoginPequenoException, LoginInvalidoException,
-			NomeVazioException, NomeInvalidoException, SenhaPequenaException, SenhaInvalidaException,
-			LoginJaExisteException {
-		this.clientes.cadastrar(cliente);
+	public Cliente cadastrarCliente(Map<String, String> cliente) throws LoginPequenoException,
+			LoginInvalidoException, NomeVazioException, NomeInvalidoException,
+			SenhaPequenaException, LoginJaExisteException {
+		return this.clientes.cadastrar(cliente);
 	}
 
 	public Cliente buscarCliente(String login) throws LoginPequenoException, LoginInvalidoException {
@@ -55,7 +67,7 @@ public class Fachada {
 	}
 
 	public void editarCliente(String login, Map<String, String> map) throws NomeInvalidoException,
-			NomeVazioException, SenhaIncorretaException, SenhaPequenaException, SenhaInvalidaException,
+			NomeVazioException, SenhaIncorretaException, SenhaPequenaException,
 			LoginPequenoException, LoginInvalidoException {
 		this.clientes.editar(login, map);
 	}
