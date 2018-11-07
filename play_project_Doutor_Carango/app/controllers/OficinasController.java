@@ -76,10 +76,9 @@ public class OficinasController extends Controller {
 
 	public Result avaliarOficina(int id) {
 		Form<Object> form = formFactory.form(Object.class).bindFromRequest();
-		for (String key : form.rawData().keySet()) {
-			Logger.debug(key + ": " + form.rawData().get(key));
-		}
-		return TODO;
+		Oficina oficina = this.fachada.buscarOficina(id);
+		oficina.addAvaliacao(fachada.logado().getLogin(), form.rawData());
+		return redirect("/oficinas/info/" + oficina.getId() + '/');
 	}
 
 	public Result edicaoOficina(int id) {
