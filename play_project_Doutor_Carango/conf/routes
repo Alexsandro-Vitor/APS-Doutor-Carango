@@ -6,6 +6,7 @@
 GET		/							controllers.HomeController.index
 GET		/login/						controllers.HomeController.login
 POST	/login/						controllers.HomeController.logar
+GET		/logout/					controllers.HomeController.deslogar
 
 # Clientes
 GET		/clientes/					controllers.ClientesController.index

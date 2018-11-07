@@ -43,4 +43,9 @@ public class HomeController extends Controller {
 				e.getMessage(), "O login falhou", "/login/", "Voltar à tela de login"));
 		}
 	}
+
+	public Result deslogar() {
+		this.fachada.deslogar();
+		return redirect("/");
+	}
 }

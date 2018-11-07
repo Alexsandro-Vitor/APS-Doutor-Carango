@@ -2,7 +2,9 @@
 
 @{
 	if (logado == null) {
-		<p><b>Você não está logado.</b> <a href="/login/">Login</a> | Cadastrar</p>
+		<p>
+			<b>Você não está logado.</b>
+			<a href="/login/">Login</a> | <a href="/clientes/adicao/">Cadastrar</a></p>
 	} else {
 		<p><b>Logado como:</b> {logado.getNome()} | <a href="/logout/">Deslogar</a></p>
 	}

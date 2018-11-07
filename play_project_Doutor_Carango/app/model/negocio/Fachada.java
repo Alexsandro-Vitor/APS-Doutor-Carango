@@ -68,6 +68,10 @@ public class Fachada {
 		return this.autenticacao.getLogado();
 	}
 
+	public void deslogar() {
+		this.autenticacao.deslogar();
+	}
+
 	public Cliente[] listarClientes() {
 		return this.clientes.listar();
 	}
