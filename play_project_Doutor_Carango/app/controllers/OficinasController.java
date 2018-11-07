@@ -1,5 +1,6 @@
 package controllers;
 
+import play.Logger;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -56,15 +57,28 @@ public class OficinasController extends Controller {
 			return ok(infoOficina.render(fachada.logado(), oficina));
 		} catch (Exception e) {
 			return badRequest(ErroOperacaoFalhou.render(
-				e.getMessage(), null, "/oficinas/", "Voltar para a lista de Oficinas"));
+				e.getMessage(), null, "/oficinas/", "Voltar para a lista de Oficinas"
+			));
 		}
 	}
 
 	public Result avaliacaoOficina(int id) {
-		return TODO;
+		Oficina oficina = fachada.buscarOficina(id);
+		if (oficina == null)
+			return notFound(oficinaNaoExiste.render(id));
+		if (fachada.logado() == null)
+			return unauthorized(ErroOperacaoFalhou.render(
+				"Você deve estar logado para fazer isso", null,
+				"/oficinas/", "Voltar para a lista de Oficinas"
+			));
+		return ok(avaliacaoOficina.render(formFactory.form(Object.class), oficina));
 	}
 
 	public Result avaliarOficina(int id) {
+		Form<Object> form = formFactory.form(Object.class).bindFromRequest();
+		for (String key : form.rawData().keySet()) {
+			Logger.debug(key + ": " + form.rawData().get(key));
+		}
 		return TODO;
 	}
 

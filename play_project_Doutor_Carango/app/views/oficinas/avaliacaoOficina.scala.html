@@ -1,0 +1,36 @@
+@(form : Form[Object], oficina : model.entidade.Oficina)
+
+<html>
+	<head>
+		<title>Avaliação de Oficina - Doutor Carango</title>
+	</head>
+	<body>
+		<h1>Avaliando Oficina @oficina.getNome()</h1>
+		@helper.form(action = helper.CSRF(routes.OficinasController.avaliarOficina(oficina.getId()))){
+			<p>
+				<label for="agilidade"><b>Nota de Agilidade:</b></label>
+				<select id="agilidade" name="Agilidade">
+					<option value="0">0</option><option value="1">1</option><option value="2">2</option>
+					<option value="3">3</option><option value="4">4</option><option value="5">5</option>
+				</select>
+			</p>
+			<p>
+				<label for="preco"><b>Nota de Preço:</b></label>
+				<select id="preco" name="Preco">
+					<option value="0">0</option><option value="1">1</option><option value="2">2</option>
+					<option value="3">3</option><option value="4">4</option><option value="5">5</option>
+				</select>
+			</p>
+			<p>
+				<label for="qualidade"><b>Nota de Qualidade:</b></label>
+				<select id="qualidade" name="Qualidade">
+					<option value="0">0</option><option value="1">1</option><option value="2">2</option>
+					<option value="3">3</option><option value="4">4</option><option value="5">5</option>
+				</select>
+			</p>
+
+			<input type="submit" value="Salvar alterações">
+		}
+		<p><a href="/oficinas/">Voltar para a lista de Oficinas</a></p>
+	</body>
+</html>
