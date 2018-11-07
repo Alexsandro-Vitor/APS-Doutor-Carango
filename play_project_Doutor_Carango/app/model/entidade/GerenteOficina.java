@@ -1,25 +1,15 @@
 package model.entidade;
 
-public class GerenteOficina {
-	private String nome;
-	private String login;
-	private String senha;
+import java.util.Map;
 
-	public GerenteOficina(String nome, String login, String senha) {
-		this.nome = nome;
-		this.login = login;
-		this.senha = senha;
-	}
+public class GerenteOficina extends Usuario {
+	public GerenteOficina() {}
 
-	public String getNome() {
-		return this.nome;
-	}
-
-	public String getLogin() {
-		return this.login;
-	}
-
-	public String getSenha() {
-		return this.senha;
+	/**
+	 * Construtor por Map de Strings.
+	 * @param map - O Map com valores para as chaves "Nome", "Login" e "Senha".
+	 */
+	public GerenteOficina(Map<String, String> map) {
+		super(map);
 	}
 }
