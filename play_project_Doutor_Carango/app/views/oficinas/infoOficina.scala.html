@@ -1,4 +1,4 @@
-@(oficina: model.entidade.Oficina)
+@(logado : model.entidade.Cliente, oficina: model.entidade.Oficina)
 
 <html>
 	<head>
@@ -6,8 +6,19 @@
 	</head>
 	<body>
 		<h1>Oficina: @oficina.getNome()</h1>
+		@MenuLogin(logado)
 		<p><b>Código:</b> @oficina.getId()</p>
 		<p><b>Endereço:</b> @oficina.getEndereco()</p>
+		<p><b>Média de Avaliações:</b><br>
+			Agilidade: @oficina.getNotaAgilidade()<br>
+			Preço: @oficina.getNotaPreco()<br>
+			Qualidade: @oficina.getNotaQualidade()
+		</p>
+		<p>
+			<b>Avaliações:</b>
+			<a href="/oficinas/info/@oficina.getId()/avaliar/">Avaliar esta oficina</a>
+		</p>
+		TODO
 		<p><a href="/oficinas/">Voltar para a lista de Oficinas</a></p>
 	</body>
 </html>

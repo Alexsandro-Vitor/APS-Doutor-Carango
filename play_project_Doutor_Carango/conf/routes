@@ -2,9 +2,12 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
+# Home and login pages
 GET		/							controllers.HomeController.index
+GET		/login/						controllers.HomeController.login
+POST	/login/						controllers.HomeController.logar
 
+# Clientes
 GET		/clientes/					controllers.ClientesController.index
 GET		/clientes/adicao/			controllers.ClientesController.adicaoCliente
 POST	/clientes/adicao/			controllers.ClientesController.adicionarCliente
@@ -18,6 +21,8 @@ GET		/oficinas/					controllers.OficinasController.index
 GET		/oficinas/adicao/			controllers.OficinasController.adicaoOficina
 POST	/oficinas/adicao/			controllers.OficinasController.adicionarOficina
 GET		/oficinas/info/:id/			controllers.OficinasController.infoOficina(id: Integer)
+GET		/oficinas/info/:id/avaliar/	controllers.OficinasController.avaliacaoOficina(id: Integer)
+POST	/oficinas/info/:id/avaliar/	controllers.OficinasController.avaliarOficina(id: Integer)
 GET		/oficinas/info/:id/edit/	controllers.OficinasController.edicaoOficina(id: Integer)
 POST	/oficinas/info/:id/edit/	controllers.OficinasController.editarOficina(id: Integer)
 GET		/oficinas/remocao/:id/	controllers.OficinasController.remocaoOficina(id: Integer)

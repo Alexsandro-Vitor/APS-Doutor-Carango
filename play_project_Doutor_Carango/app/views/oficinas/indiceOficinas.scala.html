@@ -1,4 +1,4 @@
-@(oficinas : Array[model.entidade.Oficina])
+@(logado : model.entidade.Cliente, oficinas : Array[model.entidade.Oficina])
 
 <html>
 	<head>
@@ -6,13 +6,12 @@
 	</head>
 	<body>
 		<h1>Oficinas</h1>
-		<p><a href="/oficinas/adicao/">Adicionar Oficina</a></p>
+		@MenuLogin(logado)
 		<ul>
 		@for(oficina <- oficinas) {
 			<li><b>@oficina.getNome()</b><br>
 			<a href="/oficinas/info/@oficina.getId()/">Info</a> |
-			<a href="/oficinas/info/@oficina.getId()/edit/">Editar</a> |
-			<a href="/oficinas/remocao/@oficina.getId()/">Remover</a></li>
+			<a href="/oficinas/info/@oficina.getId()/avaliar/">Avaliar</a>
 		}
 		</ul>
 		<p><a href="/">Voltar à página inicial</a></p>

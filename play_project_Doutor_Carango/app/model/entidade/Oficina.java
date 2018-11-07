@@ -38,4 +38,16 @@ public class Oficina {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public int getNotaAgilidade() {
+		return 0;
+	}
+
+	public int getNotaPreco() {
+		return 0;
+	}
+
+	public int getNotaQualidade() {
+		return 0;
+	}
 }

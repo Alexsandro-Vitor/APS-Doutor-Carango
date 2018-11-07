@@ -28,7 +28,7 @@ public class OficinasController extends Controller {
 
 	public Result index() {
 		Oficina[] oficinas = this.fachada.listarOficinas();
-		return ok(indiceOficinas.render(oficinas));
+		return ok(indiceOficinas.render(fachada.logado(), oficinas));
 	}
 
 	public Result adicaoOficina() {
@@ -53,11 +53,19 @@ public class OficinasController extends Controller {
 			Oficina oficina = fachada.buscarOficina(id);
 			if (oficina == null)
 				return notFound(oficinaNaoExiste.render(id));
-			return ok(infoOficina.render(oficina));
+			return ok(infoOficina.render(fachada.logado(), oficina));
 		} catch (Exception e) {
 			return badRequest(ErroOperacaoFalhou.render(
 				e.getMessage(), null, "/oficinas/", "Voltar para a lista de Oficinas"));
 		}
+	}
+
+	public Result avaliacaoOficina(int id) {
+		return TODO;
+	}
+
+	public Result avaliarOficina(int id) {
+		return TODO;
 	}
 
 	public Result edicaoOficina(int id) {

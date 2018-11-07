@@ -15,12 +15,15 @@ import model.negocio.NegocioClientes;
 
 import model.entidade.Oficina;
 import model.negocio.NegocioOficinas;
+import play.Logger;
 
 public class Fachada {
+	private NegocioAutenticacao autenticacao;
 	private NegocioClientes clientes;
 	private NegocioOficinas oficinas;
 
 	public Fachada() {
+		autenticacao = new NegocioAutenticacao();
 		clientes = new NegocioClientes();
 		try {
 			this.clientes.cadastrar(
@@ -50,6 +53,19 @@ public class Fachada {
 		if (Fachada.instance == null)
 			Fachada.instance = new Fachada();
 		return Fachada.instance;
+	}
+
+	public boolean logar(Map<String, String> loginInfo) throws LoginPequenoException,
+			LoginInvalidoException, SenhaIncorretaException {
+		Cliente cliente = this.clientes.buscar(loginInfo.get("Login"));
+		if (cliente != null) {
+			this.autenticacao.logar(cliente, loginInfo.get("Senha"));
+			return true;
+		} return false;
+	}
+
+	public Cliente logado() {
+		return this.autenticacao.getLogado();
 	}
 
 	public Cliente[] listarClientes() {

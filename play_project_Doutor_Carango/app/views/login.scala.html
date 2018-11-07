@@ -1,0 +1,23 @@
+@(form : Form[Object])
+@import helper._
+
+<html>
+	<head>
+		<title>Doutor Carango - Login</title>
+	</head>
+	<body>
+		<h1>Login</h1>
+		@helper.form(action = helper.CSRF(routes.HomeController.logar())){
+			<p>
+				<label for="login"><b>Login:</b></label>
+				<input type="text" id="login" name="Login">
+			</p>
+			<p>
+				<label for="senha"><b>Senha:</b></label>
+				<input type="password" id="senha" name="Senha">
+			</p>
+			<input type="submit" value="Login">
+		}
+		<p><a href="/">Voltar para a tela inicial</a></p>
+	</body>
+</html>

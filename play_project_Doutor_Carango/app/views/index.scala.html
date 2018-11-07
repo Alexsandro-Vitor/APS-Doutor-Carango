@@ -1,9 +1,12 @@
+@(logado : model.entidade.Cliente)
+
 <html>
 	<head>
 		<title>Doutor Carango - Página Inicial</title>
 	</head>
 	<body>
 		<h1>Bem vindo ao Doutor Carango</h1>
+		@MenuLogin(logado)
 		<p><a href="/clientes/">Ver lista de Clientes</a></p>
 		<p><a href="/oficinas/">Ver lista de Oficinas</a></p>
 	</body>
