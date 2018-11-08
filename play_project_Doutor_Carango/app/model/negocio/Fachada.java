@@ -3,6 +3,7 @@ package model.negocio;
 import java.util.HashMap;
 import java.util.Map;
 
+import model.entidade.Usuario;
 import model.entidade.Cliente;
 import model.entidade.Gerente;
 import model.excecoes.LoginInvalidoException;
@@ -39,8 +40,8 @@ public class Fachada {
 				usuarioInicial("Rodolfo Jose de Souza Rocha", "rjsr", "1234"));
 			this.gerentes.cadastrar(
 				usuarioInicial("Orlando Verdasca Aceto", "ova", "1234"));
-			this.oficinas.cadastrar(new Oficina("Optimus", "Cybertron"));
-			this.oficinas.cadastrar(new Oficina("Oficina", "Endereço"));
+			this.oficinas.cadastrar(new Oficina("Optimus", "Cybertron", this.gerentes.buscar("rjsr")));
+			this.oficinas.cadastrar(new Oficina("Oficina", "Endereço", this.gerentes.buscar("ova")));
 		} catch (Exception e) {}
 	}
 
@@ -59,17 +60,30 @@ public class Fachada {
 		return Fachada.instance;
 	}
 
-	public boolean logar(Map<String, String> loginInfo) throws LoginPequenoException,
-			LoginInvalidoException, SenhaIncorretaException {
-		Cliente cliente = this.clientes.buscar(loginInfo.get("Login"));
-		if (cliente != null) {
-			this.autenticacao.logar(cliente, loginInfo.get("Senha"));
+	public boolean logar(Map<String, String> loginInfo) throws
+			LoginPequenoException, LoginInvalidoException, SenhaIncorretaException {
+		Usuario usuario;
+		Logger.debug("Tipo");
+		if (loginInfo.get("Tipo").equals("Cliente"))
+			usuario = this.clientes.buscar(loginInfo.get("Login"));
+		else
+			usuario = this.gerentes.buscar(loginInfo.get("Login"));
+		if (usuario != null) {
+			this.autenticacao.logar(usuario, loginInfo.get("Senha"));
 			return true;
 		} return false;
 	}
 
-	public Cliente logado() {
+	public Usuario logado() {
 		return this.autenticacao.getLogado();
+	}
+
+	public Cliente clienteLogado() {
+		return this.autenticacao.getClienteLogado();
+	}
+
+	public Gerente gerenteLogado() {
+		return this.autenticacao.getGerenteLogado();
 	}
 
 	public void deslogar() {

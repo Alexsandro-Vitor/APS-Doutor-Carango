@@ -30,7 +30,7 @@ public class ClientesController extends Controller {
 
 	public Result index() {
 		Cliente[] clientes = this.fachada.listarClientes();
-		return ok(indiceClientes.render(clientes));
+		return ok(indiceClientes.render(fachada.logado(), clientes));
 	}
 	
 	/**

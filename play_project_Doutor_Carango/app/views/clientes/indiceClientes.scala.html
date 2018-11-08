@@ -1,4 +1,4 @@
-@(clientes : Array[model.entidade.Cliente])
+@(logado : model.entidade.Usuario, clientes : Array[model.entidade.Cliente])
 
 <html>
 	<head>
@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<h1>Clientes</h1>
-		<p><a href="/clientes/adicao/">Adicionar Cliente</a></p>
+		@MenuLogin(logado)
 		<ul>
 		@for(cliente <- clientes) {
 			<li><b>@cliente.getLogin() - @cliente.getNome()</b><br>

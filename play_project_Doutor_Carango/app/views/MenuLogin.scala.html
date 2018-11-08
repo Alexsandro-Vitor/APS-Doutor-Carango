@@ -1,10 +1,12 @@
-@(logado : model.entidade.Cliente)
+@(logado : model.entidade.Usuario)
 
 @{
 	if (logado == null) {
 		<p>
 			<b>Você não está logado.</b>
-			<a href="/login/">Login</a> | <a href="/clientes/adicao/">Cadastrar</a></p>
+			<a href="/login/">Login</a> |
+			Cadastrar: <a href="/clientes/adicao/">Cliente</a> | <a href="/gerentes/adicao/">Gerente</a>
+		</p>
 	} else {
 		<p><b>Logado como:</b> {logado.getNome()} | <a href="/logout/">Deslogar</a></p>
 	}

@@ -66,9 +66,9 @@ public class OficinasController extends Controller {
 		Oficina oficina = fachada.buscarOficina(id);
 		if (oficina == null)
 			return notFound(oficinaNaoExiste.render(id));
-		if (fachada.logado() == null)
+		if (fachada.clienteLogado() == null)
 			return unauthorized(ErroOperacaoFalhou.render(
-				"Você deve estar logado para fazer isso", null,
+				"Você deve estar logado como Cliente para fazer isso", null,
 				"/oficinas/", "Voltar para a lista de Oficinas"
 			));
 		return ok(avaliacaoOficina.render(formFactory.form(Object.class), oficina));
@@ -77,7 +77,7 @@ public class OficinasController extends Controller {
 	public Result avaliarOficina(int id) {
 		Form<Object> form = formFactory.form(Object.class).bindFromRequest();
 		Oficina oficina = this.fachada.buscarOficina(id);
-		oficina.addAvaliacao(fachada.logado().getLogin(), form.rawData());
+		oficina.addAvaliacao(fachada.clienteLogado().getLogin(), form.rawData());
 		return redirect("/oficinas/info/" + oficina.getId() + '/');
 	}
 

@@ -14,9 +14,10 @@ public class Oficina {
 
 	public Oficina() {}
 
-	public Oficina(String nome, String endereco) {
+	public Oficina(String nome, String endereco, Gerente gerente) {
 		this.nome = nome;
 		this.endereco = endereco;
+		this.gerente = gerente;
 		this.avaliacoesAgilidade = new HashMap<String, Integer>();
 		this.avaliacoesPreco = new HashMap<String, Integer>();
 		this.avaliacoesQualidade = new HashMap<String, Integer>();
