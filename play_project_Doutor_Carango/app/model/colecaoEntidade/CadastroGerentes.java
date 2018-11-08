@@ -1,19 +1,20 @@
 package model.colecaoEntidade;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.HashMap;
 
 import model.entidade.Gerente;
+import model.entidade.Usuario;
 import model.interfaces.IRepositorioGerentes;
 
 /**
  * Repositório no qual os Gerentes são armazenados na memória. Não é persistente.
  */
-public class CadastroGerentes implements IRepositorioGerentes {
-	private Map<String, Gerente> gerentes;
+public class CadastroGerentes extends CadastroUsuarios implements IRepositorioGerentes {
 
 	public CadastroGerentes() {
-		this.gerentes = new HashMap<String, Gerente>();
+		super();
 	}
 
 	/**
@@ -21,12 +22,8 @@ public class CadastroGerentes implements IRepositorioGerentes {
 	 * @return Todos os gerentes em um array.
 	 */
 	public Gerente[] listar() {
-		Gerente[] saida = new Gerente[this.gerentes.size()];
-		int i = 0;
-		for (String key : this.gerentes.keySet()) {
-			saida[i++] = this.gerentes.get(key);
-		}
-		return saida;
+		Usuario[] superSaida = super.listar();
+		return Arrays.copyOf(superSaida, superSaida.length, Gerente[].class);
 	}
 
 	/**
@@ -34,7 +31,7 @@ public class CadastroGerentes implements IRepositorioGerentes {
 	 * @param gerente O novo Gerente.
 	 */
 	public void cadastrar(Gerente gerente) {
-		this.gerentes.put(gerente.getLogin(), gerente);
+		super.cadastrar(gerente);
 	}
 
 	/**
@@ -43,7 +40,7 @@ public class CadastroGerentes implements IRepositorioGerentes {
 	 * @return O Gerente com o login dado.
 	 */
 	public Gerente buscar(String login) {
-		return this.gerentes.get(login);
+		return (Gerente)super.buscar(login);
 	}
 
 	/**
@@ -51,6 +48,6 @@ public class CadastroGerentes implements IRepositorioGerentes {
 	 * @param nome O login do Gerente buscado.
 	 */
 	public void remover(String login) {
-		this.gerentes.remove(login);
+		super.remover(login);
 	}
 }

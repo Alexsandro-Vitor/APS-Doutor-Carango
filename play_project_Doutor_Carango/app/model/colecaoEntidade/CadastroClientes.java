@@ -1,19 +1,20 @@
 package model.colecaoEntidade;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.HashMap;
 
 import model.entidade.Cliente;
+import model.entidade.Usuario;
 import model.interfaces.IRepositorioClientes;
 
 /**
  * Repositório no qual os Clientes são armazenados na memória. Não é persistente.
  */
-public class CadastroClientes implements IRepositorioClientes {
-	private Map<String, Cliente> clientes;
+public class CadastroClientes extends CadastroUsuarios implements IRepositorioClientes {
 
 	public CadastroClientes() {
-		this.clientes = new HashMap<String, Cliente>();
+		super();
 	}
 
 	/**
@@ -21,12 +22,8 @@ public class CadastroClientes implements IRepositorioClientes {
 	 * @return Todos os clientes em um array.
 	 */
 	public Cliente[] listar() {
-		Cliente[] saida = new Cliente[this.clientes.size()];
-		int i = 0;
-		for (String key : this.clientes.keySet()) {
-			saida[i++] = this.clientes.get(key);
-		}
-		return saida;
+		Usuario[] superSaida = super.listar();
+		return Arrays.copyOf(superSaida, superSaida.length, Cliente[].class);
 	}
 
 	/**
@@ -34,7 +31,7 @@ public class CadastroClientes implements IRepositorioClientes {
 	 * @param cliente O novo Cliente.
 	 */
 	public void cadastrar(Cliente cliente) {
-		this.clientes.put(cliente.getLogin(), cliente);
+		super.cadastrar(cliente);
 	}
 
 	/**
@@ -43,7 +40,7 @@ public class CadastroClientes implements IRepositorioClientes {
 	 * @return O Cliente com o login dado.
 	 */
 	public Cliente buscar(String login) {
-		return this.clientes.get(login);
+		return (Cliente)super.buscar(login);
 	}
 
 	/**
@@ -51,6 +48,6 @@ public class CadastroClientes implements IRepositorioClientes {
 	 * @param nome O login do Cliente buscado.
 	 */
 	public void remover(String login) {
-		this.clientes.remove(login);
+		super.remover(login);
 	}
 }
