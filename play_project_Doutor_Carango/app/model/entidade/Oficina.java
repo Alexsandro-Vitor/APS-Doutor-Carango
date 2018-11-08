@@ -67,6 +67,11 @@ public class Oficina {
 		return saida / avaliacoesAgilidade.size();
 	}
 
+	public String showNotaAgilidade() {
+		if (avaliacoesAgilidade.isEmpty()) return "Sem Avaliações";
+		else return "" + this.getNotaAgilidade();
+	}
+
 	public int getNotaPreco() {
 		if (avaliacoesPreco.isEmpty()) return -1;
 		int saida = 0;
@@ -75,12 +80,22 @@ public class Oficina {
 		return saida / avaliacoesPreco.size();
 	}
 
+	public String showNotaPreco() {
+		if (avaliacoesPreco.isEmpty()) return "Sem Avaliações";
+		else return "" + this.getNotaPreco();
+	}
+
 	public int getNotaQualidade() {
 		if (avaliacoesQualidade.isEmpty()) return -1;
 		int saida = 0;
 		for (String key : avaliacoesQualidade.keySet())
 			saida += avaliacoesQualidade.get(key);
 		return saida / avaliacoesQualidade.size();
+	}
+
+	public String showNotaQualidade() {
+		if (avaliacoesQualidade.isEmpty()) return "Sem Avaliações";
+		else return "" + this.getNotaQualidade();
 	}
 
 	public void addAvaliacao(String login, Map<String, String> map) {
