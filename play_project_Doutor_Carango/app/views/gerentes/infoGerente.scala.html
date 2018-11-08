@@ -1,0 +1,13 @@
+@(gerente: model.entidade.Gerente)
+
+<html>
+	<head>
+		<title>@gerente.getLogin() - Doutor Carango</title>
+	</head>
+	<body>
+		<h1>Gerente: @gerente.getLogin()</h1>
+		<p><b>Nome:</b> @gerente.getNome()</p>
+		<p><a href="/gerentes/info/@gerente.getLogin()/edit/">Editar informações</a></p>
+		<p><a href="/gerentes/">Voltar para a lista de Gerentes</a></p>
+	</body>
+</html>

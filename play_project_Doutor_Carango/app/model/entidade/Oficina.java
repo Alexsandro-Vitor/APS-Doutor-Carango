@@ -7,6 +7,7 @@ public class Oficina {
 	private String nome;
 	private String endereco;
 	private int id;
+	private Gerente gerente;
 	private Map<String, Integer> avaliacoesAgilidade;
 	private Map<String, Integer> avaliacoesPreco;
 	private Map<String, Integer> avaliacoesQualidade;
@@ -47,6 +48,14 @@ public class Oficina {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Gerente getGerente() {
+		return this.gerente;
+	}
+
+	public void setGerente(Gerente gerente) {
+		this.gerente = gerente;
 	}
 
 	public int getNotaAgilidade() {

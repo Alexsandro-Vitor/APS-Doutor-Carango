@@ -1,0 +1,27 @@
+@(gerenteForm : Form[model.entidade.Gerente])
+@import helper._
+
+<html>
+	<head>
+		<title>Cadatrar Gerente - Doutor Carango</title>
+	</head>
+	<body>
+		<h1>Cadastro de Gerente</h1>
+		@helper.form(action = helper.CSRF(routes.GerentesController.adicionarGerente())){
+			<p>
+				<label for="nome"><b>Nome:</b></label>
+				<input type="text" id="nome" name="Nome">
+			</p>
+			<p>
+				<label for="login"><b>Login:</b></label>
+				<input type="text" id="login" name="Login">
+			</p>
+			<p>
+				<label for="senha"><b>Senha:</b></label>
+				<input type="password" id="senha" name="Senha">
+			</p>
+			<input type="submit" value="Cadastrar">
+		}
+		<p><a href="/gerentes/">Voltar para a lista de Gerentes</a></p>
+	</body>
+</html>

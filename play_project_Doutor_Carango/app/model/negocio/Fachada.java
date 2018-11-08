@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import model.entidade.Cliente;
+import model.entidade.Gerente;
 import model.excecoes.LoginInvalidoException;
 import model.excecoes.LoginJaExisteException;
 import model.excecoes.LoginPequenoException;
@@ -12,6 +13,7 @@ import model.excecoes.NomeVazioException;
 import model.excecoes.SenhaIncorretaException;
 import model.excecoes.SenhaPequenaException;
 import model.negocio.NegocioClientes;
+import model.negocio.NegocioGerentes;
 
 import model.entidade.Oficina;
 import model.negocio.NegocioOficinas;
@@ -20,27 +22,29 @@ import play.Logger;
 public class Fachada {
 	private NegocioAutenticacao autenticacao;
 	private NegocioClientes clientes;
+	private NegocioGerentes gerentes;
 	private NegocioOficinas oficinas;
 
 	public Fachada() {
-		autenticacao = new NegocioAutenticacao();
-		clientes = new NegocioClientes();
+		this.autenticacao = new NegocioAutenticacao();
+		this.clientes = new NegocioClientes();
+		this.gerentes = new NegocioGerentes();
+		this.oficinas = new NegocioOficinas();
 		try {
 			this.clientes.cadastrar(
-				clienteInicial("Alexsandro Vítor Serafim de Carvalho", "avsc", "1234"));
+				usuarioInicial("Alexsandro Vítor Serafim de Carvalho", "avsc", "1234"));
 			this.clientes.cadastrar(
-				clienteInicial("Raquel Maria Santos de Oliveira", "rmso", "1234"));
-			this.clientes.cadastrar(
-				clienteInicial("Rodolfo Jose de Souza Rocha", "rjsr", "1234"));
-			this.clientes.cadastrar(
-				clienteInicial("Orlando Verdasca Aceto", "ova", "1234"));
-			oficinas = new NegocioOficinas();
+				usuarioInicial("Raquel Maria Santos de Oliveira", "rmso", "1234"));
+			this.gerentes.cadastrar(
+				usuarioInicial("Rodolfo Jose de Souza Rocha", "rjsr", "1234"));
+			this.gerentes.cadastrar(
+				usuarioInicial("Orlando Verdasca Aceto", "ova", "1234"));
 			this.oficinas.cadastrar(new Oficina("Optimus", "Cybertron"));
 			this.oficinas.cadastrar(new Oficina("Oficina", "Endereço"));
 		} catch (Exception e) {}
 	}
 
-	private Map<String, String> clienteInicial(String nome, String login, String senha) {
+	private Map<String, String> usuarioInicial(String nome, String login, String senha) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("Nome", nome);
 		map.put("Login", login);
@@ -94,6 +98,30 @@ public class Fachada {
 
 	public boolean removerCliente(String login) throws LoginPequenoException, LoginInvalidoException {
 		return this.clientes.remover(login);
+	}
+
+	public Gerente[] listarGerentes() {
+		return this.gerentes.listar();
+	}
+
+	public Gerente cadastrarGerente(Map<String, String> cliente) throws LoginPequenoException,
+			LoginInvalidoException, NomeVazioException, NomeInvalidoException,
+			SenhaPequenaException, LoginJaExisteException {
+		return this.gerentes.cadastrar(cliente);
+	}
+
+	public Gerente buscarGerente(String login) throws LoginPequenoException, LoginInvalidoException {
+		return this.gerentes.buscar(login);
+	}
+
+	public void editarGerente(String login, Map<String, String> map) throws NomeInvalidoException,
+			NomeVazioException, SenhaIncorretaException, SenhaPequenaException,
+			LoginPequenoException, LoginInvalidoException {
+		this.gerentes.editar(login, map);
+	}
+
+	public boolean removerGerente(String login) throws LoginPequenoException, LoginInvalidoException {
+		return this.gerentes.remover(login);
 	}
 
 	public Oficina[] listarOficinas() {

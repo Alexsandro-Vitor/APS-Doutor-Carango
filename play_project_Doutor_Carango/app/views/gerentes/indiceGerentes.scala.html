@@ -1,0 +1,20 @@
+@(gerentes : Array[model.entidade.Gerente])
+
+<html>
+	<head>
+		<title>Gerentes - Doutor Carango</title>
+	</head>
+	<body>
+		<h1>Gerentes</h1>
+		<p><a href="/gerentes/adicao/">Adicionar Gerente</a></p>
+		<ul>
+		@for(gerente <- gerentes) {
+			<li><b>@gerente.getLogin() - @gerente.getNome()</b><br>
+			<a href="/gerentes/info/@gerente.getLogin()/">Info</a> |
+			<a href="/gerentes/info/@gerente.getLogin()/edit/">Editar</a> |
+			<a href="/gerentes/remocao/@gerente.getLogin()/">Remover</a></li>
+		}
+		</ul>
+		<p><a href="/">Voltar à página inicial</a></p>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+@(gerenteForm : Form[model.entidade.Gerente], gerente : model.entidade.Gerente)
+@import helper._
+
+<html>
+	<head>
+		<title>Editar Gerente - Doutor Carango</title>
+	</head>
+	<body>
+		<h1>Editando Gerente @gerente.getLogin()</h1>
+		@helper.form(action = helper.CSRF(routes.GerentesController.editarGerente(gerente.getLogin()))){
+			<p>
+				<label for="senha_atual"><b>Senha Atual:</b></label>
+				<input type="password" id="senha_atual" name="Senha Atual">
+			</p>
+			A senha atual é necessária para alterar os dados do Gerente
+			<p>
+				<label for="nome"><b>Nome:</b></label>
+				<input type="text" id="nome" name="Nome" placeholder="@gerente.getNome()" size="50">
+			</p>
+			<p>
+				<label for="nova_senha"><b>Nova Senha:</b></label>
+				<input type="password" id="nova_senha" name="Nova Senha">
+			</p>
+
+			<input type="submit" value="Salvar alterações">
+		}
+		<p><a href="/gerentes/">Voltar para a lista de Gerentes</a></p>
+	</body>
+</html>

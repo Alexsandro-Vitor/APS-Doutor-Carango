@@ -17,6 +17,15 @@ GET		/clientes/info/:login/edit/	controllers.ClientesController.edicaoCliente(lo
 POST	/clientes/info/:login/edit/	controllers.ClientesController.editarCliente(login: String)
 GET		/clientes/remocao/:login/	controllers.ClientesController.remocaoCliente(login: String)
 
+# Gerentes
+GET		/gerentes/					controllers.GerentesController.index
+GET		/gerentes/adicao/			controllers.GerentesController.adicaoGerente
+POST	/gerentes/adicao/			controllers.GerentesController.adicionarGerente
+GET		/gerentes/info/:login/		controllers.GerentesController.infoGerente(login: String)
+GET		/gerentes/info/:login/edit/	controllers.GerentesController.edicaoGerente(login: String)
+POST	/gerentes/info/:login/edit/	controllers.GerentesController.editarGerente(login: String)
+GET		/gerentes/remocao/:login/	controllers.GerentesController.remocaoGerente(login: String)
+
 # Oficinas
 GET		/oficinas/					controllers.OficinasController.index
 GET		/oficinas/adicao/			controllers.OficinasController.adicaoOficina
