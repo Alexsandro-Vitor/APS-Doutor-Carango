@@ -34,13 +34,13 @@ public class NegocioClientes extends NegocioUsuarios {
 	/**
 	 * Cadastra um Cliente novo.
 	 * @param cliente Os dados do novo Cliente.
+	 * @return O novo Cliente.
 	 * @throws LoginPequenoException Se o login tiver menos de 3 caracteres.
 	 * @throws LoginInvalidoException Se o login conter caracteres inválidos.
 	 * @throws NomeVazioException Se o nome não for preenchido.
 	 * @throws NomeInvalidoException Se o nome conter caracteres inválidos.
 	 * @throws SenhaPequenaException Se a senha tiver menos de 4 caracteres.
 	 * @throws LoginJaExisteException Se já existe um Cliente com esse nome.
-	 * @return O novo Cliente.
 	 */
 	public Cliente cadastrar(Map<String, String> cliente) throws LoginPequenoException,
 			LoginInvalidoException, NomeVazioException, NomeInvalidoException,
