@@ -16,7 +16,7 @@ import model.colecaoEntidade.CadastroGerentes;
 /**
  * Classe responsável por tratar as entradas para o repositório de Gerentes.
  */
-public class NegocioGerentes {
+public class NegocioGerentes extends NegocioUsuarios {
 	private IRepositorioGerentes cadastro;
 
 	public NegocioGerentes() {
@@ -107,40 +107,5 @@ public class NegocioGerentes {
 		boolean saida = this.cadastro.buscar(login) != null;
 		this.cadastro.remover(login);
 		return saida;
-	}
-
-	/**
-	 * Checa se a String é nula ou vazia.
-	 * @param s A String a ser checada.
-	 * @return true se s == null ou s.length() == 0, false caso contrário.
-	 */
-	private boolean nullOrEmpty(String s) {
-		return s == null || s.isEmpty();
-	}
-
-	private void validarLogin(String login) throws LoginPequenoException, LoginInvalidoException {
-		if (login == null || login.length() < LoginPequenoException.TAM_MINIMO)
-			throw new LoginPequenoException();
-		if (!login.matches(LoginInvalidoException.REGEX_LOGIN))
-			throw new LoginInvalidoException();
-	}
-
-	private void validarLoginAdicao(String login) throws LoginPequenoException,
-			LoginInvalidoException, LoginJaExisteException {
-		validarLogin(login);
-		if (this.cadastro.buscar(login) != null)
-			throw new LoginJaExisteException();
-	}
-
-	private void validarNome(String nome) throws NomeVazioException, NomeInvalidoException {
-		if (nullOrEmpty(nome))
-			throw new NomeVazioException();
-		if (!nome.matches(NomeInvalidoException.REGEX_NOME))
-			throw new NomeInvalidoException();
-	}
-
-	private void validarSenha(String senha) throws SenhaPequenaException {
-		if (senha.length() < SenhaPequenaException.TAM_MINIMO)
-			throw new SenhaPequenaException();
 	}
 }

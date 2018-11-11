@@ -63,7 +63,6 @@ public class Fachada {
 	public boolean logar(Map<String, String> loginInfo) throws
 			LoginPequenoException, LoginInvalidoException, SenhaIncorretaException {
 		Usuario usuario;
-		Logger.debug("Tipo");
 		if (loginInfo.get("Tipo").equals("Cliente"))
 			usuario = this.clientes.buscar(loginInfo.get("Login"));
 		else
